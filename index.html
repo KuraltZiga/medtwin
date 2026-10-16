@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="sl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#050912" />
+  <meta name="description" content="MEDTWIN — interaktivni prikaz operacijskega sistema personalizirane preventive in finančnega modela za zavarovalnice. Vsi podatki v demu so sintetični." />
+  <title>MEDTWIN — The future has a twin.</title>
+<style>
+:root{--bg:#050910;--bg2:#080e19;--surface:#101827;--text:#ecf4ff;--muted:#8a9aaf;--muted2:#536479;--cyan:#7df9e6;--blue:#76aaff;--line:rgba(169,198,230,.12);--g:linear-gradient(115deg,#a4fff1 0%,#7aebdf 45%,#81aaff 100%)}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:80;opacity:.09;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' opacity='.2' filter='url(%23n)'/%3E%3C/svg%3E")}
+button,input{font:inherit}button{cursor:pointer}a{color:inherit;text-decoration:none}::selection{background:#8beee4;color:#091221}.container{width:min(1440px,calc(100% - 104px));margin:auto}.eyebrow{color:var(--cyan);font-size:10px;letter-spacing:.23em;font-weight:800;text-transform:uppercase;display:flex;align-items:center;gap:10px}.eyebrow::before{content:"";width:19px;height:1px;background:var(--cyan)}h1,h2,h3,p{margin-top:0}h1,h2{letter-spacing:-.07em;font-weight:570}h2{font-size:clamp(42px,5vw,75px);line-height:1.04}h3{letter-spacing:-.035em}p{line-height:1.65}.subtle{color:var(--muted)}.gradient-text{background:var(--g);-webkit-background-clip:text;background-clip:text;color:transparent}.btn{display:inline-flex;align-items:center;justify-content:center;gap:23px;padding:16px 22px;border-radius:8px;font-size:13px;font-weight:750;transition:.25s transform,.25s box-shadow,.25s background;white-space:nowrap}.btn:hover{transform:translateY(-2px)}.btn-primary{background:#a0f7e9;color:#07121a;box-shadow:0 0 50px rgba(93,235,215,.10)}.btn-primary:hover{box-shadow:0 0 45px rgba(93,235,215,.30)}.btn-ghost{border:1px solid rgba(185,224,247,.20);color:var(--text);background:rgba(255,255,255,.035)}.arrow{font-size:20px;line-height:10px}.glass{background:linear-gradient(140deg,rgba(22,37,56,.65),rgba(6,14,26,.67));border:1px solid rgba(170,218,244,.12);box-shadow:inset 0 1px 0 rgba(255,255,255,.04),0 25px 80px rgba(0,0,0,.16);backdrop-filter:blur(24px)}
+/* NAV */
+.navbar{height:81px;position:fixed;left:0;right:0;top:0;z-index:60;border-bottom:1px solid rgba(200,226,249,.075);background:rgba(4,9,18,.82);backdrop-filter:blur(22px)}.navinner{height:100%;display:flex;align-items:center;justify-content:space-between;gap:16px}.brand{display:flex;align-items:center;gap:10px;font-size:21px;letter-spacing:.12em;font-weight:800}.brand-mark{position:relative;width:28px;height:28px;border:1.5px solid #8cf7e8;border-radius:8px;transform:rotate(45deg);box-shadow:0 0 25px #43c6c74d}.brand-mark::before,.brand-mark::after{content:"";position:absolute;inset:5px;border:1px solid rgba(135,242,240,.72);border-radius:50%}.brand-mark::after{inset:10px;background:#a9fff3;border:0;box-shadow:0 0 11px #7cf6ea}.brand-label{padding-left:3px}.navlinks{display:flex;align-items:center;gap:38px;color:#aab9ca;font-size:12px;font-weight:550}.navlinks a:hover{color:white}.nav-right{display:flex;align-items:center;gap:21px}.status{font-size:10px;letter-spacing:.12em;color:#a3c4c6;font-weight:800;display:flex;align-items:center;gap:9px}.pulse-dot{width:6px;height:6px;border-radius:50%;background:var(--cyan);box-shadow:0 0 0 5px rgba(130,248,222,.09),0 0 12px var(--cyan);animation:blink 2.3s infinite}@keyframes blink{50%{opacity:.35}}.navcta{border:1px solid #304b54;border-radius:5px;padding:11px 15px;color:#d9fff4;font-size:11px;letter-spacing:.04em;font-weight:700}.navcta:hover{background:rgba(121,246,222,.12)}
+/* HERO */
+.hero{position:relative;min-height:850px;height:max(850px,100svh);display:flex;align-items:center;overflow:hidden;background:radial-gradient(ellipse at 79% 44%,rgba(20,71,106,.27),transparent 34%),radial-gradient(ellipse at 49% 98%,rgba(9,33,59,.24),transparent 40%),#050a13}.hero::before{content:"";position:absolute;inset:0;background-image:linear-gradient(90deg,transparent 0%,rgba(130,194,242,.022) 50%,transparent 100%),linear-gradient(rgba(145,195,252,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(145,195,252,.025) 1px,transparent 1px);background-size:100% 100%,82px 82px,82px 82px;mask-image:linear-gradient(to bottom,transparent 10%,black 100%)}.hero-grid{display:grid;grid-template-columns:1.03fr .97fr;position:relative;z-index:2;align-items:center;min-height:810px;padding-top:90px}.hero-copy{max-width:750px;position:relative;z-index:4;padding-bottom:30px}.overline{display:inline-flex;align-items:center;gap:11px;border:1px solid rgba(125,249,230,.19);border-radius:100px;padding:9px 13px;margin-bottom:30px;background:rgba(105,244,221,.037);color:#a0e4d9;font-size:10px;font-weight:760;letter-spacing:.13em}.overline .pulse-dot{width:5px;height:5px}.hero h1{font-size:clamp(55px,5.65vw,91px);line-height:1.04;margin-bottom:25px;letter-spacing:-.079em;max-width:800px}.hero h1 span{display:block}.hero-desc{max-width:485px;font-size:17px;color:#9aacc1;line-height:1.8;margin-bottom:35px}.hero-actions{display:flex;gap:12px;flex-wrap:wrap}.hero-caption{display:flex;gap:20px;align-items:center;margin-top:48px;color:#7e91a4;font-size:10px;letter-spacing:.03em}.hero-caption .rule{height:1px;width:34px;background:#456075}.hero-visual{position:absolute;right:-5%;top:80px;bottom:0;width:59%;height:calc(100% - 80px);pointer-events:none}.hero-visual canvas{width:100%;height:100%;display:block;filter:drop-shadow(0 0 18px rgba(43,190,212,.11))}.holo-aura{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:520px;height:610px;border-radius:50%;background:radial-gradient(ellipse,rgba(38,164,202,.11) 0%,rgba(43,102,205,.045) 30%,transparent 69%);filter:blur(24px)}.holo-ellipse{position:absolute;left:50%;top:54%;width:400px;height:530px;transform:translate(-50%,-50%) rotate(-8deg);border-radius:50%;border:1px solid rgba(106,210,241,.13);box-shadow:inset 0 0 50px rgba(36,103,153,.025),0 0 64px rgba(10,105,161,.06);animation:ellip 14s ease-in-out infinite alternate}.holo-ellipse.two{width:515px;height:420px;transform:translate(-50%,-50%) rotate(59deg);border-color:rgba(106,210,241,.075);animation-duration:18s}.holo-ellipse.three{width:450px;height:570px;transform:translate(-50%,-50%) rotate(22deg);border-color:rgba(106,210,241,.07);animation-duration:12s}@keyframes ellip{to{transform:translate(-50%,-50%) rotate(15deg)}}.holo-floor{position:absolute;bottom:10%;left:50%;transform:translateX(-50%);width:500px;height:55px;border:1px solid rgba(91,214,231,.33);border-radius:50%;box-shadow:0 0 30px rgba(60,191,224,.14),inset 0 0 18px rgba(76,181,225,.10);background:radial-gradient(ellipse,rgba(65,208,218,.09),transparent 70%)}.floating-label{position:absolute;z-index:3;color:#b4d6e5;background:rgba(7,21,36,.55);border:1px solid rgba(139,226,246,.13);backdrop-filter:blur(18px);padding:13px 16px;min-width:140px;box-shadow:0 14px 50px rgba(0,0,0,.18)}.floating-label .tiny{display:block;font-size:9px;letter-spacing:.14em;color:#648a9c;margin-bottom:7px}.floating-label strong{font-size:16px;font-weight:580;letter-spacing:-.04em}.floating-label.top{top:18%;right:12%}.floating-label.bottom{bottom:20%;right:19%}.floating-label.left{bottom:33%;left:7%;width:128px}.mini-wave{margin-top:10px;height:25px;width:100%}.corner-tag{position:absolute;font-size:9px;color:#6d899e;letter-spacing:.18em}.tag-top{top:10%;left:25%}.tag-bot{bottom:9%;left:32%}.hero-bottom{height:1px;background:linear-gradient(90deg,transparent,#487a8f3d,transparent);position:absolute;bottom:0;left:0;right:0}
+/* RIBBON / VALUE */
+.metrics-ribbon{border-bottom:1px solid var(--line);background:#070d17}.metrics-inner{min-height:116px;display:grid;grid-template-columns:repeat(4,1fr);align-items:center}.metric-item{padding-left:32px;border-left:1px solid rgba(151,187,219,.12)}.metric-item:first-child{padding-left:0;border:0}.metric-item strong{display:block;font-size:22px;font-weight:620;letter-spacing:-.05em;margin-bottom:6px}.metric-item span{font-size:11px;color:#8599af}.section{padding:148px 0}.section-intro{max-width:750px;margin-bottom:70px}.section-intro h2{margin-top:24px;margin-bottom:23px}.section-intro p{font-size:16px;color:var(--muted);max-width:570px}.value{background:radial-gradient(ellipse at 50% 0,rgba(17,57,86,.22),transparent 42%),#080e17}.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.step{min-height:300px;padding:35px;border:1px solid var(--line);background:linear-gradient(140deg,rgba(22,35,53,.48),rgba(8,14,23,.72));position:relative;overflow:hidden}.step::after{content:"";position:absolute;top:-35px;right:-40px;width:140px;height:140px;border:1px solid rgba(110,189,210,.08);border-radius:50%;box-shadow:0 0 0 30px rgba(92,167,216,.014)}.step-number{font-size:11px;letter-spacing:.20em;color:var(--cyan);display:block;margin-bottom:82px}.step h3{font-size:25px;margin-bottom:12px}.step p{font-size:13px;color:#8ea1b4;max-width:295px;line-height:1.7}.divider-art{height:1px;background:linear-gradient(90deg,transparent,#33536a,transparent)}
+/* LAB */
+.lab{background:radial-gradient(ellipse at 25% 50%,rgba(27,83,122,.13),transparent 40%),#050a12}.lab-header{display:flex;align-items:end;justify-content:space-between;gap:30px;margin-bottom:52px}.lab-header h2{margin:20px 0 0}.lab-sub{max-width:375px;color:#8fa2b8;font-size:14px;line-height:1.7}.simulation-stamp{border:1px solid rgba(125,249,230,.19);background:rgba(46,174,174,.07);color:#8ef8e7;font-size:10px;letter-spacing:.09em;padding:10px 13px;display:inline-flex;align-items:center;gap:8px;font-weight:760}.lab-shell{display:grid;grid-template-columns:1.05fr .95fr;gap:18px;min-height:674px}.lab-viewport{position:relative;min-height:675px;overflow:hidden;background:radial-gradient(ellipse at 51% 43%,rgba(20,72,107,.25),transparent 50%),linear-gradient(135deg,rgba(15,32,50,.77),rgba(7,17,29,.86));border:1px solid rgba(162,208,237,.15)}.lab-viewport::after{content:"";position:absolute;inset:16px;border:1px solid rgba(137,179,218,.055);pointer-events:none}.lab-viewport canvas{display:block;width:100%;height:100%;position:absolute;inset:0;cursor:grab;touch-action:pan-y}.lab-viewport canvas:active{cursor:grabbing}.lab-view-head{position:absolute;top:28px;left:29px;right:30px;display:flex;justify-content:space-between;align-items:start;pointer-events:none}.lab-view-head small{display:block;color:#658a9c;font-size:9px;font-weight:750;letter-spacing:.16em;margin-bottom:9px}.lab-view-head strong{font-size:14px;font-weight:630}.lab-view-bot{position:absolute;left:30px;right:30px;bottom:24px;display:flex;justify-content:space-between;gap:20px;align-items:end;pointer-events:none}.lab-view-bot p{font-size:11px;color:#87a2b8;line-height:1.5;margin:0}.rotate-hint{font-size:10px;letter-spacing:.08em;color:#7395a7;white-space:nowrap}.target-ring{position:absolute;inset:11% 18%;border-radius:50%;border:1px solid rgba(121,194,224,.065);pointer-events:none}.lab-controls{display:flex;flex-direction:column;gap:14px}.control-card{border:1px solid rgba(164,205,232,.13);padding:27px 29px;background:linear-gradient(132deg,rgba(18,32,51,.72),rgba(8,17,30,.84))}.control-title{display:flex;justify-content:space-between;align-items:center;margin-bottom:21px;font-size:11px;font-weight:770;letter-spacing:.11em;color:#a6bbcf}.control-title span:last-child{color:#60788c;font-weight:550;font-size:10px}.organ-selector{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}.organ-btn{color:#9ab0c6;background:rgba(111,161,216,.05);border:1px solid rgba(136,188,221,.12);padding:13px 3px;border-radius:5px;font-size:11px;transition:.2s}.organ-btn:hover{color:white;border-color:#5f9c9e}.organ-btn.active{background:rgba(116,240,223,.12);border-color:rgba(116,240,223,.49);color:#b1fff2;box-shadow:inset 0 0 20px rgba(92,231,217,.035)}.time-legend{display:flex;align-items:end;justify-content:space-between;margin-bottom:13px}.time-legend strong{font-size:33px;letter-spacing:-.06em;font-weight:580;white-space:nowrap}.time-legend strong small{letter-spacing:0;font-weight:500;margin-left:5px;vertical-align:middle}.time-legend small{color:#8399ad;font-size:11px}.range{appearance:none;-webkit-appearance:none;width:100%;height:3px;border-radius:5px;background:linear-gradient(90deg,#83f7dc var(--p,50%),rgba(101,145,181,.29) var(--p,50%));outline:0;margin:12px 0 8px;cursor:pointer}.range::-webkit-slider-thumb{appearance:none;width:14px;height:14px;border-radius:50%;background:#abfff3;border:3px solid #092333;box-shadow:0 0 0 1px #a3f9f0,0 0 12px #64e9d799}.range::-moz-range-thumb{width:11px;height:11px;border-radius:50%;background:#abfff3;border:2px solid #092333}.ticks{display:flex;justify-content:space-between;color:#58758b;font-size:9px}.habit-grid{display:grid;grid-template-columns:1fr 1fr;gap:21px 25px}.habit-label{display:flex;align-items:center;justify-content:space-between;gap:8px;color:#90a8bd;font-size:11px}.habit-label strong{color:#e6f7ff;font-size:12px;font-weight:650}.habit .range{margin-top:12px}.lab-readout{display:grid;grid-template-columns:1fr 1fr;gap:14px}.readout{padding:20px 21px;min-height:126px;background:linear-gradient(139deg,rgba(21,57,66,.37),rgba(12,29,41,.76));border:1px solid rgba(134,220,218,.15)}.readout:nth-child(2){background:linear-gradient(139deg,rgba(21,37,64,.4),rgba(10,22,39,.76));border-color:rgba(126,162,228,.14)}.readout small{display:block;color:#91abba;font-size:10px;margin-bottom:17px;line-height:1.4}.readout strong{display:block;color:#b2fff1;font-weight:590;font-size:35px;line-height:1;letter-spacing:-.06em}.readout:nth-child(2) strong{color:#adc7ff}.readout em{font-style:normal;color:#6d92a2;font-size:11px;letter-spacing:0}.chart-card{border:1px solid rgba(165,214,244,.13);background:linear-gradient(135deg,rgba(15,29,45,.77),rgba(7,17,30,.95));padding:26px 29px;margin-top:16px}.chart-top{display:flex;align-items:center;justify-content:space-between;gap:12px}.chart-top h3{font-size:15px;font-weight:580;letter-spacing:-.03em;margin:0}.legend{display:flex;gap:17px;color:#93a5ba;font-size:10px}.legend span{display:flex;align-items:center;gap:6px}.legend i{height:2px;width:14px;display:inline-block;background:#6fa0cb}.legend .scenario i{background:#8bf8e8}.trend-graph{margin-top:13px;width:100%;height:158px;overflow:visible}.chart-years{display:flex;justify-content:space-between;color:#526e84;font-size:10px;margin:4px 14px 0 40px}.simulation-foot{margin-top:19px;padding:17px 20px;border-left:2px solid rgba(131,239,224,.5);color:#89a3b7;background:rgba(100,161,190,.042);font-size:12px;line-height:1.6}.simulation-foot strong{color:#d6edf3}
+/* INSURANCE */
+.insurance{background:radial-gradient(ellipse at 20% 20%,rgba(27,78,94,.14),transparent 35%),#080e17}.insurance-top{display:grid;grid-template-columns:1.1fr .9fr;gap:70px;align-items:end;margin-bottom:58px}.insurance-top h2{margin:20px 0 0}.insurance-top p{max-width:480px;margin:0 0 8px auto;font-size:15px;color:#99adbf}.tiers{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.tier{border:1px solid rgba(143,187,218,.13);padding:33px;min-height:480px;background:linear-gradient(155deg,rgba(20,34,51,.76),rgba(8,14,24,.9));position:relative;overflow:hidden;cursor:pointer;transition:.3s border-color,.3s transform,.3s background}.tier:hover{transform:translateY(-5px);border-color:rgba(120,231,217,.5)}.tier.selected{border-color:rgba(136,248,230,.67);background:linear-gradient(150deg,rgba(29,67,77,.49),rgba(10,22,37,.88));box-shadow:inset 0 1px 0 rgba(168,255,247,.18),0 14px 65px rgba(30,136,147,.07)}.tier.featured::before{content:"";height:2px;position:absolute;left:0;right:0;top:0;background:var(--g)}.tier-head{display:flex;align-items:center;justify-content:space-between;gap:10px}.tier-index{font-size:10px;color:#67869b;letter-spacing:.18em}.tier-badge{font-size:9px;color:#a5f9e8;border:1px solid rgba(132,249,225,.24);padding:6px 8px;letter-spacing:.12em}.tier h3{font-size:32px;font-weight:570;margin:38px 0 9px}.tier-summary{color:#8299af;font-size:13px;line-height:1.65;min-height:70px}.tier-divider{height:1px;background:rgba(151,202,233,.13);margin:22px 0}.tier ul{padding:0;margin:0;list-style:none;display:flex;flex-direction:column;gap:15px}.tier li{display:flex;align-items:start;gap:11px;font-size:12px;color:#b5c9d8;line-height:1.45}.tick{font-size:15px;color:#80f2df;line-height:1}.tier-action{margin-top:33px;border:1px solid rgba(123,234,215,.25);border-radius:4px;width:100%;padding:12px;text-align:center;color:#b3f8ee;font-weight:700;letter-spacing:.04em;font-size:11px;background:rgba(133,248,232,.04)}.tier.selected .tier-action{background:#a0f4e6;color:#07171c}.concept-note{margin-top:19px;color:#677f92;font-size:11px}
+/* CALCULATOR */
+.finance{background:#050a13;position:relative;overflow:hidden}.finance::before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 75% 50%,rgba(19,73,98,.17),transparent 40%);pointer-events:none}.finance-head{display:flex;justify-content:space-between;gap:40px;align-items:end;margin-bottom:52px}.finance-head h2{margin:21px 0 0}.finance-head p{max-width:430px;color:#8ca0b5;font-size:14px;margin-bottom:4px}.fin-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:18px}.fin-params,.fin-results{padding:36px;border:1px solid rgba(143,188,222,.15);background:linear-gradient(125deg,rgba(18,33,51,.76),rgba(8,17,29,.90));min-height:545px}.fin-results{background:radial-gradient(ellipse at 70% 0,rgba(58,143,135,.11),transparent 55%),linear-gradient(135deg,rgba(15,34,46,.75),rgba(7,20,32,.93))}.fin-card-title{display:flex;justify-content:space-between;gap:16px;align-items:center;color:#a9bed0;font-size:11px;font-weight:720;letter-spacing:.13em;margin-bottom:29px}.fin-card-title small{font-size:10px;color:#67869a;font-weight:500}.scenarios{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-bottom:31px}.scenario-btn{background:rgba(92,132,168,.08);border:1px solid rgba(139,184,217,.13);border-radius:4px;padding:11px 5px;color:#93aabb;font-size:11px}.scenario-btn.active{background:rgba(122,244,221,.12);border-color:rgba(133,246,228,.5);color:#b6ffef}.fin-control{margin-bottom:25px}.fin-control:last-child{margin-bottom:0}.fin-label{display:flex;justify-content:space-between;gap:10px;font-size:12px;color:#92abc0}.fin-label strong{color:#e5f7ff;font-size:14px;letter-spacing:-.02em}.fin-footnote{border-top:1px solid rgba(161,201,235,.1);margin-top:14px;padding-top:18px;color:#6f8a9c;font-size:11px;line-height:1.7}.financial-hero{color:#95b3c0;font-size:12px}.financial-hero strong{display:block;font-size:clamp(46px,5vw,73px);font-weight:570;letter-spacing:-.076em;line-height:1.08;margin:15px 0 7px;color:#a3f8e6;white-space:nowrap}.financial-hero strong.negative{color:#ffb4a7}.financial-hero p{color:#688999;font-size:11px;margin-bottom:0}.financial-divider{height:1px;background:rgba(144,188,219,.13);margin:27px 0}.finance-numbers{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.finance-number{border-right:1px solid rgba(145,194,219,.13)}.finance-number:last-child{border-right:0}.finance-number small{display:block;color:#7994a6;font-size:10px;line-height:1.4;min-height:35px}.finance-number strong{display:block;font-size:25px;font-weight:600;letter-spacing:-.06em;margin-top:6px}.finance-bars{margin-top:38px}.bar-item{margin-top:20px}.bar-item .bar-label{display:flex;justify-content:space-between;gap:12px;font-size:11px;color:#94acba;margin-bottom:9px}.bar-item .bar-label strong{color:#e4f3ff;font-weight:580}.bar-track{height:5px;background:rgba(125,156,186,.15);position:relative;overflow:hidden;border-radius:7px}.bar-track b{display:block;height:100%;width:30%;background:#79aaf4;border-radius:7px;transition:width .5s ease}.bar-item:last-child .bar-track b{background:#95f6dc}.finance-disclaimer{margin-top:21px;color:#7893a6;font-size:11px;line-height:1.7}.fin-bottom{display:grid;grid-template-columns:repeat(3,1fr);gap:17px;margin-top:18px}.fin-bottom-item{padding:23px 26px;border:1px solid rgba(151,190,218,.12);font-size:11px;color:#88a3b6;line-height:1.6}.fin-bottom-item strong{display:block;font-size:12px;color:#bdd2df;margin-bottom:7px}
+/* CLOSE */
+.close{padding:135px 0 125px;background:radial-gradient(ellipse at 50% 0%,rgba(26,91,111,.22),transparent 56%),#09121b;text-align:center;border-top:1px solid var(--line)}.close .eyebrow{justify-content:center}.close h2{font-size:clamp(56px,7vw,108px);line-height:1.02;letter-spacing:-.08em;margin:28px auto 24px;max-width:920px}.close p{max-width:600px;color:#91a7b8;margin:0 auto 32px;font-size:15px}.footer{border-top:1px solid rgba(154,203,222,.12);padding:31px 0;background:#060b12}.footer-inner{display:flex;align-items:center;justify-content:space-between;gap:20px;font-size:11px;color:#647d90}.footer .brand{font-size:16px;color:#c7dfeb}.footer .brand-mark{width:20px;height:20px;border-radius:6px}.footer .brand-mark::before{inset:4px}.footer .brand-mark::after{inset:7px}.footer-links{display:flex;gap:24px}.footer-links a:hover{color:#a7fff3}.skip{position:absolute;left:-9999px;top:auto}.skip:focus{left:10px;top:10px;z-index:100;padding:12px;background:white;color:black}
+@media(max-width:1190px){.container{width:min(100% - 58px,1440px)}.hero h1{font-size:clamp(50px,6.2vw,78px)}.hero-visual{right:-15%;width:65%}.floating-label.left{display:none}.lab-shell{grid-template-columns:1fr 1fr}.control-card{padding:22px}.organ-selector{gap:5px}.organ-btn{font-size:10px}.tier{padding:26px}.fin-params,.fin-results{padding:27px}.financial-hero strong{font-size:57px}}
+@media(max-width:900px){.navlinks{display:none}.hero{min-height:890px;height:auto}.hero-grid{min-height:890px;display:block;padding-top:164px}.hero-copy{max-width:670px}.hero h1{font-size:clamp(52px,8.2vw,80px)}.hero-visual{top:350px;right:-26%;height:570px;width:95%;opacity:.65}.hero-copy{z-index:5}.hero-desc{max-width:420px}.floating-label{display:none}.metrics-inner{grid-template-columns:repeat(2,1fr);gap:22px;padding:35px 0}.metric-item:nth-child(3){padding-left:0;border:0}.steps{grid-template-columns:1fr}.step{min-height:215px}.step-number{margin-bottom:43px}.lab-header,.finance-head{align-items:start}.lab-shell,.fin-grid{grid-template-columns:1fr}.lab-viewport{min-height:610px}.lab-controls{display:grid;grid-template-columns:1fr 1fr}.lab-controls .control-card:nth-child(1),.lab-controls .control-card:nth-child(3){grid-column:span 2}.lab-readout{grid-column:span 2}.tiers{gap:10px}.tier{min-height:490px;padding:20px}.tier h3{font-size:26px}.tier-summary{min-height:92px}.insurance-top{gap:20px}.fin-bottom{grid-template-columns:1fr 1fr}.financial-hero strong{font-size:66px}}
+@media(max-width:630px){.container{width:calc(100% - 38px)}.navbar{height:68px}.brand{font-size:17px}.brand-mark{width:23px;height:23px}.nav-right .status{display:none}.navcta{font-size:10px;padding:10px}.hero{min-height:805px}.hero-grid{padding-top:135px;min-height:805px}.hero h1{font-size:clamp(46px,12vw,68px);letter-spacing:-.08em}.hero-desc{font-size:14px;line-height:1.7;max-width:320px}.hero-visual{top:368px;right:-36%;height:445px;width:125%;opacity:.49}.holo-floor{bottom:5%;width:330px}.holo-aura{width:350px}.hero-actions{gap:9px}.btn{font-size:11px;padding:13px 16px;gap:9px}.hero-caption{margin-top:27px;font-size:9px;max-width:290px}.overline{font-size:9px;letter-spacing:.08em;margin-bottom:23px}.metrics-inner{min-height:132px;gap:19px 9px;padding:26px 0}.metric-item{padding-left:15px}.metric-item strong{font-size:16px}.metric-item span{font-size:10px}.section{padding:88px 0}.section-intro{margin-bottom:38px}.section-intro h2{font-size:45px}.section-intro p{font-size:14px}.step{padding:25px;min-height:206px}.step h3{font-size:22px}.step-number{margin-bottom:38px}.lab-header,.insurance-top,.finance-head{display:block;margin-bottom:34px}.lab-header h2,.insurance-top h2,.finance-head h2{font-size:44px}.lab-sub,.insurance-top p,.finance-head p{max-width:100%;margin-top:17px}.lab-viewport{min-height:530px}.lab-view-head{top:20px;left:18px;right:18px}.lab-view-bot{left:17px;bottom:15px;right:17px}.rotate-hint{font-size:9px}.lab-controls{display:flex}.control-card{padding:22px 20px}.organ-btn{padding:12px 2px;font-size:10px}.habit-grid{gap:21px 18px}.readout strong{font-size:30px}.chart-card{padding:21px 14px}.chart-top{flex-direction:column;align-items:start;gap:12px}.tiers{grid-template-columns:1fr;gap:12px}.tier{min-height:0;padding:27px}.tier h3{margin-top:25px}.tier-summary{min-height:0}.tier ul{gap:12px}.tier-action{margin-top:25px}.fin-params,.fin-results{padding:24px 20px;min-height:0}.financial-hero strong{font-size:55px}.finance-numbers{gap:7px}.finance-number strong{font-size:21px}.fin-bottom{grid-template-columns:1fr;gap:10px}.fin-bottom-item{padding:19px}.close{padding:87px 0}.close h2{font-size:55px}.footer-inner{flex-wrap:wrap}.footer-inner .footer-links{width:100%;flex-wrap:wrap;gap:12px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation-duration:.001ms!important;transition-duration:.001ms!important}}
+
+/* --- MEDTWIN HERO 2.0 --- */
+.hero-grid.hero-grid-new{grid-template-columns:minmax(620px,1.1fr) minmax(360px,.9fr);gap:34px;align-items:center;min-height:840px;padding-top:118px;padding-bottom:42px}
+.hero-stage{position:relative;min-height:700px;border-radius:28px;overflow:hidden;border:1px solid rgba(163,215,239,.14);background:linear-gradient(140deg,rgba(7,15,29,.84),rgba(8,16,29,.52));box-shadow:inset 0 1px 0 rgba(255,255,255,.03),0 40px 100px rgba(0,0,0,.28)}
+.hero-stage::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 48% 44%,rgba(46,166,221,.18),transparent 27%),radial-gradient(circle at 77% 24%,rgba(60,103,206,.11),transparent 22%),linear-gradient(180deg,rgba(255,255,255,.025),transparent 22%);pointer-events:none}
+.hero-stage::after{content:"";position:absolute;inset:18px;border:1px solid rgba(122,173,205,.08);border-radius:24px;pointer-events:none}
+.hero-copy-new{max-width:640px;padding-bottom:0}
+.hero-copy-new .eyebrow{margin-bottom:18px}
+.hero-copy-new h1{font-size:clamp(58px,5.5vw,88px);line-height:.98;max-width:640px;margin-bottom:26px}
+.hero-copy-new .hero-desc{max-width:560px;font-size:18px;line-height:1.72;margin-bottom:32px}
+.hero-copy-new .hero-caption{max-width:620px;margin-top:32px}
+.hero-copy-new .hero-actions{margin-top:12px}
+.hero-copy-new h1 .line{display:block}
+.hero-copy-new h1 .gradient-text{display:inline}
+.hero-profile{position:absolute;left:22px;top:28px;width:295px;border-radius:22px;padding:22px 22px 18px;z-index:6}
+.hero-profile h3{font-size:25px;margin:0 0 18px;letter-spacing:-.045em}
+.profile-rows{display:grid;gap:10px;margin-bottom:14px}
+.profile-row{display:flex;justify-content:space-between;gap:14px;padding-bottom:10px;border-bottom:1px solid rgba(146,195,219,.12);font-size:14px;color:#d6e4f4}
+.profile-row span:first-child{color:#9db2c6}
+.profile-row.highlight{align-items:center;margin-top:2px;padding:11px 14px;border:1px solid rgba(125,249,230,.20);border-radius:14px;background:rgba(103,242,221,.08);color:#a8fff3;font-weight:700}
+.profile-row.highlight span:first-child{color:#b8ebe5}
+.profile-age-delta{display:flex;align-items:center;gap:14px;color:#8adfd7;margin-top:10px}
+.profile-age-delta strong{display:block;font-size:17px;letter-spacing:-.05em}
+.profile-age-delta small{display:block;font-size:11px;color:#88a9ba;letter-spacing:.08em;line-height:1.35}
+.sparkline{width:54px;height:28px}
+.hero-metrics{position:absolute;left:22px;bottom:22px;width:305px;display:grid;gap:10px;z-index:5}
+.metric-card-small{display:grid;grid-template-columns:44px 1fr auto;align-items:center;gap:12px;padding:16px 16px;border-radius:18px;background:linear-gradient(140deg,rgba(15,28,45,.76),rgba(8,18,31,.68));border:1px solid rgba(165,214,242,.13);box-shadow:0 20px 50px rgba(0,0,0,.16);backdrop-filter:blur(16px)}
+.metric-card-small .icon{width:40px;height:40px;border-radius:14px;display:grid;place-items:center;background:rgba(111,238,229,.08);border:1px solid rgba(126,247,230,.16);color:#8cfced;font-size:20px;box-shadow:inset 0 1px 0 rgba(255,255,255,.03)}
+.metric-card-small .label{display:block;font-size:11px;letter-spacing:.12em;color:#7f9fb3;text-transform:uppercase;margin-bottom:3px}
+.metric-card-small strong{font-size:18px;letter-spacing:-.04em}
+.metric-card-small .delta{font-size:12px;color:#6ef0dc;font-weight:700}
+.metric-wave{width:82px;height:28px;opacity:.96}
+.hero-figures{position:absolute;inset:0;z-index:1}
+.hero-person{position:absolute;left:285px;bottom:28px;width:265px;height:520px;display:flex;align-items:flex-end;justify-content:center;animation:avatarFloat 6.6s ease-in-out infinite;z-index:4}
+.hero-person::before{content:"";position:absolute;bottom:24px;left:50%;transform:translateX(-50%);width:210px;height:210px;border-radius:50%;background:radial-gradient(circle,rgba(120,255,234,.15) 0, rgba(90,169,252,.08) 35%, rgba(0,0,0,0) 72%);filter:blur(16px);z-index:0}
+.hero-person::after{content:"";position:absolute;left:50%;bottom:18px;transform:translateX(-50%);width:170px;height:18px;border-radius:50%;background:radial-gradient(ellipse,rgba(102,255,239,.20),rgba(17,116,160,.03) 68%,transparent 72%);filter:blur(2px)}
+.avatar-shell{position:relative;width:100%;height:100%;border-radius:32px;background:linear-gradient(180deg,rgba(255,255,255,.025),rgba(255,255,255,.005));overflow:hidden}
+.avatar-shell img{position:absolute;inset:auto 0 0 0;width:100%;height:100%;object-fit:contain;object-position:center bottom;filter:saturate(.88) contrast(1.08) brightness(1.05) drop-shadow(0 18px 28px rgba(0,0,0,.28));z-index:2}
+.avatar-shell::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(4,10,19,0) 0%,rgba(4,10,19,.0) 30%,rgba(3,8,15,.18) 72%,rgba(3,8,15,.3) 100%),radial-gradient(circle at 50% 18%,rgba(149,230,255,.09),transparent 26%);z-index:3;pointer-events:none}
+.avatar-shell::after{content:"";position:absolute;inset:-10% 40% -10% -20%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.12),transparent);transform:skewX(-20deg) translateX(-170%);animation:sheenMove 8s linear infinite;z-index:4;pointer-events:none}
+.avatar-scan{position:absolute;inset:10px;border-radius:28px;border:1px solid rgba(145,216,252,.09);box-shadow:inset 0 0 40px rgba(59,129,196,.05);z-index:1}
+.avatar-badge{position:absolute;left:50%;top:16px;transform:translateX(-50%);z-index:5;border:1px solid rgba(125,249,230,.18);border-radius:999px;padding:8px 11px;background:rgba(10,24,36,.46);backdrop-filter:blur(10px);font-size:10px;letter-spacing:.12em;color:#9eece3;font-weight:800}
+.hero-twin-wrap{position:absolute;left:412px;bottom:10px;width:360px;height:620px;z-index:2;animation:twinFloat 5.7s ease-in-out infinite}
+.hero-visual{position:absolute;inset:0;pointer-events:none;width:100%;height:100%}
+.hero-visual canvas{width:100%;height:100%;display:block;filter:drop-shadow(0 0 24px rgba(43,190,212,.13))}
+.hero-stage .holo-aura{left:52%;top:46%;width:470px;height:580px}
+.hero-stage .holo-ellipse{left:58%;top:48%;width:340px;height:520px}
+.hero-stage .holo-ellipse.two{width:480px;height:380px}
+.hero-stage .holo-ellipse.three{width:400px;height:560px}
+.hero-stage .holo-floor{bottom:7%;left:54%;width:390px;height:46px}
+.hero-stage .floating-label{padding:14px 16px;border-radius:16px;background:rgba(7,21,36,.5)}
+.hero-stage .floating-label.top{top:88px;right:28px}
+.hero-stage .floating-label.left{left:auto;right:26px;bottom:222px;width:160px}
+.hero-stage .floating-label.bottom{right:34px;bottom:68px;min-width:175px}
+.hero-stage .corner-tag{color:#7790a8}
+.hero-stage .tag-top{top:28px;left:auto;right:184px}
+.hero-stage .tag-bot{bottom:20px;left:360px}
+.hero-summary{position:absolute;right:20px;bottom:20px;width:300px;display:grid;grid-template-columns:1fr 1fr;gap:12px;z-index:5}
+.summary-card{border-radius:18px;padding:18px 18px 16px;background:linear-gradient(140deg,rgba(15,28,45,.78),rgba(8,18,31,.68));border:1px solid rgba(165,214,242,.13);backdrop-filter:blur(16px);min-height:128px}
+.summary-card.wide{grid-column:span 2;display:grid;grid-template-columns:1.1fr .9fr;gap:16px;align-items:center;min-height:148px}
+.summary-label{display:flex;align-items:center;gap:8px;font-size:11px;letter-spacing:.12em;color:#90abc2;text-transform:uppercase;margin-bottom:10px}
+.summary-label::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--cyan);box-shadow:0 0 10px rgba(125,249,230,.35)}
+.summary-number{font-size:18px;font-weight:800;letter-spacing:-.045em;margin-top:8px}
+.summary-big{font-size:44px;line-height:1;letter-spacing:-.06em;font-weight:800}
+.summary-muted{font-size:12px;line-height:1.45;color:#8ba3b9}
+.summary-list{display:grid;gap:8px;font-size:13px;color:#d2e3ef}
+.summary-list .dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:8px;background:#8cf8e9;box-shadow:0 0 12px rgba(125,249,230,.35)}
+.summary-gauge{position:relative;display:grid;place-items:center;width:126px;height:126px;margin-inline:auto;border-radius:50%;background:conic-gradient(#81f6e9 0 258deg,rgba(123,171,198,.16) 258deg 360deg)}
+.summary-gauge::before{content:"";position:absolute;inset:12px;border-radius:50%;background:#09111d;box-shadow:inset 0 0 40px rgba(36,113,170,.18)}
+.summary-gauge .gauge-inner{position:relative;display:grid;place-items:center;text-align:center;gap:3px;z-index:1}
+.summary-gauge strong{font-size:24px;line-height:1;letter-spacing:-.05em}
+.summary-gauge span{font-size:13px;color:#96aabd}
+.summary-gauge em{display:inline-block;margin-top:4px;font-style:normal;font-size:13px;color:#8af9e8;font-weight:800}
+.summary-curve svg,.summary-mini svg{display:block;width:100%;height:auto}
+.summary-mini{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.hero-pulse{animation:pulseCard 4.3s ease-in-out infinite}
+@keyframes avatarFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+@keyframes twinFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+@keyframes sheenMove{0%{transform:skewX(-20deg) translateX(-170%)}100%{transform:skewX(-20deg) translateX(230%)}}
+@keyframes pulseCard{0%,100%{box-shadow:0 20px 50px rgba(0,0,0,.16)}50%{box-shadow:0 26px 70px rgba(33,141,190,.16)}}
+@media(max-width:1190px){.hero-grid.hero-grid-new{grid-template-columns:1fr;gap:24px;min-height:auto}.hero-copy-new{order:-1;max-width:100%}.hero-stage{min-height:720px}.hero-person{left:240px}.hero-twin-wrap{left:365px}.hero-summary{width:280px}.hero-stage .floating-label.left{display:block}}
+@media(max-width:900px){.hero-grid.hero-grid-new{padding-top:118px;padding-bottom:24px}.hero-copy-new h1{font-size:clamp(48px,9vw,74px)}.hero-stage{min-height:980px}.hero-profile{position:relative;left:auto;top:auto;width:auto;margin:22px 22px 0}.hero-metrics{position:relative;left:auto;bottom:auto;width:auto;margin:14px 22px 22px}.hero-figures{position:relative;height:545px;margin-top:6px}.hero-person{left:18px;bottom:12px;width:250px;height:490px}.hero-twin-wrap{left:auto;right:10px;bottom:-12px;width:330px;height:560px}.hero-stage .holo-aura{left:72%;top:47%;width:380px;height:480px}.hero-stage .holo-ellipse{left:75%;top:49%;width:300px;height:420px}.hero-stage .holo-ellipse.two{width:390px;height:320px}.hero-stage .holo-ellipse.three{width:330px;height:460px}.hero-stage .holo-floor{left:71%;width:310px}.hero-stage .floating-label.top{top:28px;right:20px}.hero-stage .floating-label.left{right:18px;bottom:190px}.hero-stage .floating-label.bottom{right:20px;bottom:22px}.hero-stage .tag-top{right:24px;top:212px}.hero-stage .tag-bot{left:26px;bottom:20px}.hero-summary{position:relative;right:auto;bottom:auto;width:auto;margin:0 22px 22px;grid-template-columns:1fr 1fr}.summary-card.wide{grid-template-columns:1fr}.hero-copy-new .hero-desc,.hero-copy-new .hero-caption{max-width:100%}}
+@media(max-width:630px){.hero{min-height:auto}.hero-grid.hero-grid-new{padding-top:96px}.hero-copy-new h1{font-size:clamp(40px,12vw,62px)}.hero-stage{min-height:1110px;border-radius:24px}.hero-profile{padding:18px}.hero-profile h3{font-size:22px}.profile-row{font-size:13px}.hero-figures{height:410px}.hero-person{width:180px;height:350px;left:8px;bottom:34px}.hero-twin-wrap{width:225px;height:390px;right:0;bottom:20px}.hero-stage .holo-aura{left:72%;top:48%;width:255px;height:330px}.hero-stage .holo-ellipse{left:74%;top:51%;width:200px;height:300px}.hero-stage .holo-ellipse.two{width:270px;height:210px}.hero-stage .holo-ellipse.three{width:230px;height:330px}.hero-stage .holo-floor{left:70%;width:220px;height:28px;bottom:14%}.avatar-badge{font-size:9px;padding:6px 9px}.metric-card-small{grid-template-columns:38px 1fr;gap:10px}.metric-wave{display:none}.hero-stage .floating-label,.hero-stage .corner-tag{display:none}.hero-summary{grid-template-columns:1fr;gap:10px}.summary-card,.summary-card.wide{min-height:0}.summary-gauge{width:110px;height:110px}.summary-big{font-size:36px}.hero-copy-new .hero-actions{display:grid;grid-template-columns:1fr}.hero-copy-new .hero-caption{font-size:9px}}
+
+
+/* 2026 / MULTI-LAYER PERSONALIZED PREVENTION */
+.hero-grid.hero-grid-new{align-items:start;min-height:860px}
+.hero-copy-new{padding-top:26px;max-width:690px}
+.hero-copy-new h1{font-size:clamp(54px,5.1vw,81px);line-height:1.02}
+.hero-stage{min-height:800px}
+.hero-person{left:260px;bottom:68px;width:300px;height:565px;animation:avatarFloat 6.4s ease-in-out infinite}
+.avatar-shell{overflow:visible;background:none}
+.avatar-shell img{position:absolute;inset:auto auto 0 50%;transform:translateX(-50%);width:auto;height:98%;object-fit:contain;filter:drop-shadow(0 12px 24px rgba(1,9,21,.60)) drop-shadow(0 0 28px rgba(65,196,240,.13));z-index:2}
+.avatar-shell:before{display:none}
+.avatar-shell:after{border-radius:20px;z-index:4;pointer-events:none}
+.avatar-scan{inset:15px 5px 7px;border-radius:160px 160px 30px 30px}
+.hero-person .avatar-badge{z-index:5;white-space:nowrap}
+.hero-twin-wrap{left:422px;bottom:45px;width:380px;height:620px}
+.hero-stage:before{background:radial-gradient(circle at 64% 36%,rgba(38,137,214,.20),transparent 28%),radial-gradient(circle at 30% 50%,rgba(45,126,206,.08),transparent 26%),linear-gradient(180deg,rgba(255,255,255,.03),transparent 26%)}
+.hero-stage .hero-metrics{bottom:20px;left:18px;width:285px}
+.hero-stage .hero-summary{width:295px;right:15px;bottom:18px;gap:9px}
+.pgx-hero-teaser{display:flex;flex-direction:column;gap:8px;grid-column:span 2;padding:14px 15px;border:1px solid rgba(140,165,245,.34);border-radius:18px;background:linear-gradient(130deg,rgba(40,31,77,.88),rgba(13,27,48,.83));color:#eff5ff;backdrop-filter:blur(20px);box-shadow:0 0 40px rgba(113,82,211,.06);transition:.25s background,.25s transform}
+.pgx-hero-teaser:hover{transform:translateY(-3px);background:linear-gradient(130deg,rgba(54,46,100,.98),rgba(13,27,48,.91))}
+.pgx-hero-label{display:flex;align-items:center;gap:7px;font-size:10px;font-weight:800;letter-spacing:.12em;color:#c1b5ff}
+.pgx-hero-gene{color:#d9aaff;font-size:19px}
+.pgx-hero-demo{font-size:8px;letter-spacing:.04em;margin-left:auto;border:1px solid rgba(181,162,254,.23);padding:4px 5px;border-radius:5px;color:#c3b6f2}
+.pgx-hero-teaser strong{font-size:17px;letter-spacing:-.025em}
+.pgx-hero-mid{color:#af9eff;font-weight:450}
+.pgx-hero-detail{font-size:11px;color:#b6c6d8;line-height:1.45}
+.pgx-hero-detail span{float:right;color:#b7a4ff;font-size:17px}
+.hero-stage .hero-summary .summary-card.wide{min-height:150px;padding:15px;grid-template-columns:1fr 74px;gap:9px}
+.hero-stage .hero-summary .summary-card.wide .summary-mini{display:block;text-align:center}
+.hero-stage .hero-summary .summary-card.wide .summary-big{font-size:29px}
+.hero-stage .hero-summary .summary-card.wide .summary-muted{font-size:10px}
+.hero-stage .hero-summary .summary-card.wide .summary-label{font-size:9px}
+.hero-stage .hero-summary .summary-card.wide .summary-number{font-size:13px;line-height:1.3}
+.hero-stage .hero-summary .summary-card{min-height:0;padding:13px;border-radius:16px}
+.hero-stage .hero-summary .summary-list{font-size:10px;gap:7px}
+.hero-stage .hero-summary .summary-gauge{width:94px;height:94px}
+.hero-stage .hero-summary .summary-gauge strong{font-size:20px}
+.hero-stage .hero-summary .summary-gauge span{font-size:11px}
+.hero-stage .hero-summary .summary-gauge em{font-size:11px}
+.hero-stage .hero-summary .summary-label{font-size:9px}
+.pgx-section{padding:116px 0 128px;background:radial-gradient(ellipse at 35% 50%,rgba(66,50,136,.15),transparent 39%),linear-gradient(180deg,#08101b,#070c17)}
+.pgx-heading{display:flex;gap:34px;align-items:end;justify-content:space-between;margin-bottom:45px}
+.pgx-heading h2{margin:19px 0 19px;font-size:clamp(43px,5vw,76px)}
+.pgx-heading p{max-width:680px;font-size:15px;color:#9cadc2;margin-bottom:0}
+.pgx-sim-badge{display:flex;flex-direction:column;align-items:flex-start;flex:0 0 248px;padding:17px 18px;border:1px solid rgba(167,141,255,.25);background:rgba(70,52,130,.13);border-radius:14px;font-size:10px;letter-spacing:.11em;color:#cfc4ff;font-weight:780}
+.pgx-sim-badge small{font-size:11px;letter-spacing:0;color:#91a2b7;font-weight:500;margin-top:7px;line-height:1.35}
+.pgx-badge-dot{width:6px;height:6px;background:#b19cff;box-shadow:0 0 10px #a68aff;display:inline-block;border-radius:50%;margin-bottom:8px}
+.pgx-workspace{display:grid;grid-template-columns:.8fr 1.2fr;gap:16px}
+.pgx-molecular{min-height:545px;border:1px solid rgba(136,162,221,.17);border-radius:22px;background:radial-gradient(ellipse at center,rgba(42,78,125,.20),transparent 54%),linear-gradient(140deg,rgba(18,29,51,.8),rgba(7,13,25,.88));position:relative;overflow:hidden}
+.pgx-molecular:before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(145,195,252,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(145,195,252,.03) 1px,transparent 1px);background-size:44px 44px;mask-image:linear-gradient(to bottom,black,transparent 95%)}
+.pgx-mol-top,.pgx-mol-bottom{position:absolute;z-index:4;left:25px;right:25px;display:flex;justify-content:space-between;align-items:center;color:#7f97b5;letter-spacing:.12em;font-size:10px;font-weight:730}
+.pgx-mol-top{top:25px}.pgx-mol-bottom{bottom:23px;color:#69829c;font-size:9px}
+.pgx-dna{position:absolute;z-index:3;width:min(95%,440px);height:78%;left:50%;top:12%;transform:translateX(-50%);filter:drop-shadow(0 0 20px rgba(134,164,248,.14));animation:dnaFloat 7s ease-in-out infinite}
+.dna-orbit{position:absolute;left:50%;top:50%;width:325px;height:430px;border:1px solid rgba(142,181,255,.12);border-radius:50%;transform:translate(-50%,-50%) rotate(-24deg);animation:orbitLoop 18s linear infinite}
+.dna-orbit-two{width:300px;height:390px;transform:translate(-50%,-50%) rotate(39deg);animation-duration:29s;animation-direction:reverse;border-color:rgba(178,129,247,.10)}
+@keyframes orbitLoop{to{transform:translate(-50%,-50%) rotate(360deg)}}
+@keyframes dnaFloat{50%{transform:translate(-50%,-8px)}}
+.pgx-genotype{position:absolute;z-index:5;left:22px;bottom:51px;display:flex;flex-direction:column;gap:5px;background:rgba(9,17,33,.55);border:1px solid rgba(150,157,251,.20);backdrop-filter:blur(13px);border-radius:14px;padding:12px 14px}
+.pgx-genotype span{color:#a0a7d2;font-size:9px;letter-spacing:.12em}
+.pgx-genotype strong{font-size:23px;letter-spacing:-.05em}
+.pgx-genotype em{font-style:normal;color:#b6a6ff;font-size:16px}
+.pgx-panel{padding:37px 38px;min-height:545px;border:1px solid rgba(153,177,222,.15);border-radius:22px;background:linear-gradient(145deg,rgba(19,29,49,.84),rgba(9,17,31,.91))}
+.pgx-panel-top{display:flex;align-items:center;justify-content:space-between;gap:12px;color:#94a7bf;font-size:10px;font-weight:740;letter-spacing:.11em;margin-bottom:24px}
+.pgx-panel-pill{border:1px solid rgba(187,158,255,.22);color:#c8b4ff;background:rgba(134,100,235,.12);padding:7px 10px;border-radius:100px;font-size:9px}
+.pgx-panel h3{font-size:27px;letter-spacing:-.045em;margin-bottom:8px}
+.pgx-helper{font-size:13px;color:#93a7be;margin-bottom:26px;line-height:1.55}
+.pgx-tabs{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:25px}
+.pgx-drug{border:1px solid rgba(148,166,210,.18);border-radius:9px;background:rgba(148,166,210,.045);color:#abbcd1;padding:11px 14px;font-size:12px;font-weight:660;transition:background .22s, border-color .22s,color .22s,transform .22s}
+.pgx-drug:hover{border-color:rgba(177,156,255,.45);transform:translateY(-1px)}
+.pgx-drug.active{background:rgba(131,99,231,.16);border-color:rgba(177,156,255,.48);color:#e8dcff;box-shadow:0 0 24px rgba(116,83,209,.12)}
+.pgx-interpretation{display:grid;gap:0;border:1px solid rgba(135,156,204,.12);border-radius:13px;overflow:hidden;margin-bottom:20px}
+.pgx-kv{display:grid;grid-template-columns:140px 1fr;align-items:center;gap:12px;padding:14px 18px;border-bottom:1px solid rgba(135,156,204,.12);background:rgba(7,14,28,.24)}
+.pgx-kv:last-child{border:0}
+.pgx-kv span{font-size:12px;color:#8da2b9}
+.pgx-kv strong{font-size:13px;line-height:1.4;font-weight:620;color:#e4edff}
+.pgx-insight{display:flex;gap:15px;background:linear-gradient(120deg,rgba(72,54,133,.23),rgba(30,53,84,.12));border:1px solid rgba(149,121,233,.18);padding:17px;border-radius:12px;margin-bottom:15px}
+.pgx-insight-symbol{font-size:22px;color:#bcadff;line-height:1}
+.pgx-insight strong{font-size:13px;letter-spacing:-.01em}
+.pgx-insight p{font-size:12px;color:#9eafc6;line-height:1.5;margin:8px 0 0}
+.pgx-disclaimer{font-size:11px;color:#7f95af;line-height:1.6;margin:0}
+.pgx-disclaimer span{display:inline-flex;justify-content:center;align-items:center;width:15px;height:15px;border-radius:50%;border:1px solid #9b86d5;color:#bd9ffd;font-weight:900;margin-right:5px}
+@media(max-width:1190px){.hero-copy-new{padding-top:5px}.hero-stage{min-height:830px}.hero-person{left:33%;bottom:63px}.hero-twin-wrap{left:auto;right:0;bottom:36px}.hero-stage .hero-summary{bottom:14px;right:17px}.pgx-workspace{grid-template-columns:.9fr 1.1fr}}
+@media(max-width:900px){.hero-grid.hero-grid-new{display:flex;flex-direction:column;align-items:stretch}.hero-copy-new{order:-1;padding-top:0}.hero-stage{min-height:1190px}.hero-person{left:50px;bottom:7px;height:485px;width:240px}.hero-twin-wrap{right:12px;bottom:10px;width:310px;height:530px}.hero-figures{height:510px}.hero-summary{bottom:auto!important;right:auto!important;position:relative!important;width:auto!important;margin:0 22px 22px;grid-template-columns:1fr 1fr}.pgx-hero-teaser{grid-column:span 2}.hero-stage .hero-metrics{position:relative;bottom:auto;left:auto;width:auto;margin:12px 22px}.hero-stage .summary-card.wide{grid-template-columns:1.1fr .9fr}.pgx-heading{display:block}.pgx-sim-badge{display:inline-flex;margin-top:22px}.pgx-workspace{grid-template-columns:1fr}.pgx-molecular{min-height:420px}.pgx-dna{height:88%;top:0}}
+@media(max-width:630px){.hero-grid.hero-grid-new{display:flex;flex-direction:column;align-items:stretch;padding-top:91px;gap:22px}.hero-copy-new{order:-1}.hero-copy-new h1{font-size:clamp(42px,11.5vw,60px)}.hero-stage{min-height:1250px}.hero-person{left:0;bottom:8px;width:180px;height:350px}.hero-twin-wrap{right:-15px;bottom:10px;width:230px;height:390px}.hero-figures{height:390px}.hero-summary{grid-template-columns:1fr}.pgx-hero-teaser{grid-column:span 1}.hero-stage .hero-summary .summary-card.wide{grid-column:span 1;grid-template-columns:1fr 80px;gap:8px}.hero-stage .hero-summary .summary-card{padding:13px}.hero-stage .hero-summary .summary-card:not(.wide){min-height:0}.pgx-heading h2{font-size:43px}.pgx-panel{padding:23px 19px}.pgx-panel h3{font-size:23px}.pgx-panel-top{flex-wrap:wrap}.pgx-kv{grid-template-columns:1fr;gap:4px;padding:13px}.pgx-workspace{gap:12px}.pgx-molecular{min-height:385px}.pgx-mol-top{font-size:8px}.pgx-section{padding:78px 0}.hero-person .avatar-badge{font-size:8px}.hero-copy-new .hero-desc{font-size:14px}}
+@media(prefers-reduced-motion:reduce){.pgx-dna,.dna-orbit{animation:none!important}}
+
+
+
+/* MEDTWIN / PHOTO-BASED STYLIZED CGI AVATAR */
+.hero-person{left:218px;bottom:108px;width:380px;height:590px;z-index:4;transform-style:preserve-3d;perspective:1000px;isolation:isolate}
+.hero-person::before{width:380px;height:490px;bottom:20px;left:51%;background:radial-gradient(ellipse,rgba(77,203,234,.14),rgba(31,83,184,.05) 52%,transparent 73%);filter:blur(16px);animation:avatarGlow 4.9s ease-in-out infinite}
+.hero-person::after{bottom:27px;width:280px;height:25px;filter:blur(7px)}
+.hero-person .avatar-shell{overflow:visible;transform-style:preserve-3d;width:100%;height:100%;background:none}
+.hero-person .avatar-shell img{height:98%;width:auto;max-width:none;left:50%;bottom:0;transform:translate3d(-50%,0,24px) rotateX(var(--avatar-x,0deg)) rotateY(var(--avatar-y,0deg));transform-origin:50% 40%;transition:transform .23s cubic-bezier(.2,.7,.2,1),filter .35s ease;will-change:transform;filter:drop-shadow(0 22px 32px rgba(0,5,22,.68)) drop-shadow(0 0 16px rgba(107,220,251,.16))}
+.avatar-shell::before{display:none}
+.avatar-shell::after{inset:8% 6% 8% 6%;border-radius:140px 140px 25px 25px;mix-blend-mode:screen;z-index:5}
+.hero-person .avatar-scan{inset:25px 20px 55px;border:1px solid rgba(127,204,247,.10);border-radius:190px 190px 30px 30px;transform:translateZ(-10px)}
+.hero-person .avatar-badge{display:none}
+.hero-person .avatar-shadow{position:absolute;left:13%;right:12%;bottom:43px;height:32px;border-radius:50%;background:radial-gradient(ellipse,rgba(83,236,249,.18),transparent 70%);filter:blur(7px);z-index:-1}
+.hero-person .avatar-arc{pointer-events:none;position:absolute;left:11%;right:11%;top:15%;bottom:11%;border-radius:50%;border:1px solid rgba(111,210,243,.11);box-shadow:0 0 0 25px rgba(88,165,228,.012),inset 0 0 45px rgba(80,190,239,.022);transform:rotateY(16deg) rotate(-9deg);animation:avatarOrbit 10s ease-in-out infinite alternate}
+.hero-person .avatar-beam{position:absolute;inset:0;z-index:6;pointer-events:none;overflow:hidden;mask-image:linear-gradient(90deg,transparent 10%,black 38%,black 66%,transparent 86%)}
+.hero-person .avatar-beam::after{content:"";position:absolute;top:-15%;left:0;right:0;height:30%;background:linear-gradient(to bottom,transparent,rgba(145,243,252,.08),rgba(124,242,255,.28),rgba(120,218,246,.055),transparent);animation:avatarScan 6.7s linear infinite}
+.avatar-tag{position:absolute;z-index:7;left:50%;bottom:82px;transform:translateX(-50%);font-size:9px;font-weight:800;letter-spacing:.15em;color:#b8e3f4;text-align:center;white-space:nowrap;text-shadow:0 0 12px rgba(57,193,229,.6);pointer-events:none}
+.avatar-tag .avatar-led{display:inline-block;width:6px;height:6px;border-radius:50%;background:#86f9eb;box-shadow:0 0 13px #73edeb;margin-right:6px;vertical-align:middle}
+.avatar-mode-toggle{position:absolute;z-index:16;top:24px;right:22px;display:inline-flex;align-items:center;gap:9px;font-size:10px;font-weight:760;letter-spacing:.08em;padding:11px 13px;border:1px solid rgba(125,249,230,.23);border-radius:12px;color:#a3eee6;background:rgba(5,17,31,.78);backdrop-filter:blur(15px);transition:background .2s,border-color .2s,color .2s;box-shadow:0 10px 28px rgba(0,0,0,.15)}
+.avatar-mode-toggle:hover,.avatar-mode-toggle[aria-pressed="true"]{border-color:rgba(125,249,230,.6);background:rgba(25,85,96,.58);color:#d6fffc}
+.hero-figures{overflow:visible}
+.hero-stage.avatar-digital-mode .hero-person .avatar-shell img{filter:grayscale(.4) sepia(.32) hue-rotate(139deg) saturate(1.8) contrast(1.15) drop-shadow(0 0 18px rgba(71,250,239,.75)) drop-shadow(0 0 42px rgba(62,151,255,.36));opacity:.9}
+.hero-stage.avatar-digital-mode .hero-person .avatar-beam::after{background:linear-gradient(to bottom,transparent,rgba(116,244,255,.09),rgba(136,255,243,.57),rgba(46,197,255,.12),transparent);animation-duration:3s}
+.hero-stage.avatar-digital-mode .hero-person .avatar-arc{border-color:rgba(126,251,239,.56);box-shadow:0 0 45px rgba(86,224,228,.18)}
+.hero-stage.avatar-digital-mode .hero-person::before{background:radial-gradient(ellipse,rgba(73,235,229,.29),rgba(37,131,221,.11) 50%,transparent 73%)}
+@keyframes avatarScan{0%{transform:translateY(-165%)}100%{transform:translateY(680%)}}
+@keyframes avatarGlow{50%{opacity:.5;transform:translateX(-50%) scale(1.07)}}
+@keyframes avatarOrbit{to{transform:rotateY(-15deg) rotate(8deg)}}
+@media(max-width:1190px){.hero-person{left:220px;bottom:95px;width:370px;height:580px}}
+@media(max-width:900px){.hero-person{left:4%;bottom:12px;width:340px;height:520px}.avatar-mode-toggle{top:18px;right:16px}}
+@media(max-width:630px){.hero-person{left:-4px;bottom:4px;width:212px;height:374px}.hero-person .avatar-shell img{height:100%}.avatar-tag{bottom:22px;font-size:7px}.avatar-mode-toggle{top:8px;right:8px;padding:8px;font-size:9px}.hero-person .avatar-arc{top:9%;bottom:0}}
+@media(prefers-reduced-motion:reduce){.hero-person .avatar-shell img{transition:none}.hero-person .avatar-beam::after{animation:none}}
+
+
+/* Smooth silhouette: no rectangular highlight planes around the digital human */
+.hero-person .avatar-beam{display:none!important}
+.hero-person .avatar-shell::after{display:none!important}
+
+/* MEDTWIN / balanced panoramic layout — final overrides */
+.hero{height:auto;min-height:0;overflow:hidden;padding-bottom:42px;background:radial-gradient(ellipse at 50% 52%,rgba(26,78,122,.13),transparent 58%),#050a13}
+.hero-grid.hero-grid-new{display:grid;grid-template-columns:minmax(0,1fr);gap:35px;align-items:start;width:min(1480px,calc(100% - 88px));min-height:0;padding:132px 0 34px;margin:auto}
+.hero-copy.hero-copy-new{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(320px,.75fr);grid-template-rows:auto auto auto;column-gap:62px;row-gap:12px;grid-row:1;grid-column:1;order:0;max-width:none;width:100%;padding:0;align-items:center}
+.hero-copy-new .eyebrow{grid-column:1/-1;grid-row:1;margin:0 0 9px}
+.hero-copy-new h1{grid-column:1;grid-row:2/span 2;align-self:center;margin:0;max-width:930px;font-size:clamp(54px,5.15vw,83px);line-height:1.015;letter-spacing:-.072em}
+.hero-copy-new .hero-desc{grid-column:2;grid-row:2;max-width:460px;margin:0;font-size:16px;line-height:1.68;color:#a8bad0}
+.hero-copy-new .hero-actions{grid-column:2;grid-row:3;display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin:0}
+.hero-copy-new .btn{padding:14px 17px;font-size:12px;gap:12px}
+.hero-grid.hero-grid-new>.hero-stage{grid-column:1;grid-row:2;display:grid;grid-template-columns:minmax(240px,290px) minmax(0,1fr) minmax(250px,290px);grid-template-rows:minmax(660px,1fr);gap:16px;width:100%;height:auto;min-height:710px;padding:22px;overflow:hidden;position:relative;border-radius:25px;background:linear-gradient(142deg,rgba(8,22,41,.96),rgba(8,16,29,.80))}
+.hero-stage .hero-profile{position:relative;grid-column:1;grid-row:1;align-self:start;justify-self:stretch;left:auto;right:auto;top:auto;bottom:auto;margin:0;width:100%;padding:20px 19px;z-index:9}
+.hero-stage .hero-profile h3{font-size:24px}
+.hero-stage .profile-row{font-size:12px}
+.hero-stage .profile-row.highlight{padding:10px 11px}
+.hero-stage .hero-metrics{position:relative;grid-column:1;grid-row:1;align-self:end;justify-self:stretch;left:auto;right:auto;top:auto;bottom:auto;width:100%;display:grid;grid-template-columns:1fr;gap:8px;margin:0;z-index:9}
+.hero-stage .metric-card-small{padding:10px 11px;grid-template-columns:36px minmax(0,1fr) 69px;gap:8px;min-height:66px;border-radius:13px}
+.hero-stage .metric-card-small .icon{width:34px;height:34px;border-radius:10px;font-size:18px}
+.hero-stage .metric-card-small .label{font-size:9px}
+.hero-stage .metric-card-small strong{font-size:16px}
+.hero-stage .metric-card-small .delta{font-size:10px}
+.hero-stage .metric-wave{width:68px;height:24px}
+.hero-stage .hero-figures{grid-column:2;grid-row:1;min-height:650px;height:auto;align-self:stretch;position:relative;inset:auto;overflow:visible;z-index:2}
+.hero-stage .hero-person{position:absolute;left:-8%;right:auto;bottom:14px;width:min(59%,340px);height:min(88%,580px);z-index:4;animation:avatarFloat 6.4s ease-in-out infinite}
+.hero-stage .hero-twin-wrap{position:absolute;left:auto;right:-6%;bottom:14px;width:min(64%,360px);height:min(94%,620px);z-index:3}
+.hero-stage .hero-summary{position:relative!important;grid-column:3;grid-row:1;align-self:center;justify-self:stretch;right:auto!important;left:auto;bottom:auto!important;top:auto;width:100%!important;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:10px;margin:0!important;z-index:8}
+.hero-stage .pgx-hero-teaser{grid-column:1/-1;padding:18px 15px;min-height:126px}
+.hero-stage .summary-card{min-height:0;padding:13px 11px;border-radius:14px}
+.hero-stage .summary-card .summary-label{font-size:8px;letter-spacing:.05em;line-height:1.35}
+.hero-stage .summary-card .summary-list{font-size:10px;gap:10px}
+.hero-stage .summary-card .summary-gauge{width:106px;height:106px}
+.hero-stage .summary-card .summary-gauge strong{font-size:21px}
+.hero-stage .summary-card .summary-gauge span{font-size:11px}
+.hero-stage .summary-card .summary-gauge em{font-size:10px}
+.hero-stage .hero-summary>.summary-card{min-width:0}
+.hero-stage .summary-list .dot{width:6px;height:6px;margin-right:4px}
+.hero-stage .floating-label,.hero-stage .corner-tag{display:none}
+.hero-stage .holo-floor{bottom:9%}
+.hero-stage .avatar-arc{opacity:.8}
+.hero-stage .hero-summary::after{content:'VSI KLINIČNI PODATKI SO SINTETIČNI';grid-column:1/-1;font-size:9px;color:#758da5;letter-spacing:.08em;text-align:center;margin-top:7px}
+@media(max-width:1230px){
+.hero-grid.hero-grid-new{width:calc(100% - 58px)}
+.hero-copy.hero-copy-new{column-gap:25px;grid-template-columns:minmax(0,1.15fr) minmax(300px,.85fr)}
+.hero-copy-new h1{font-size:clamp(48px,5.2vw,69px)}
+.hero-grid.hero-grid-new>.hero-stage{grid-template-columns:minmax(210px,250px) minmax(0,1fr) minmax(230px,260px);padding:18px;gap:12px}
+.hero-stage .hero-person{left:-13%;width:65%}
+.hero-stage .hero-twin-wrap{right:-11%;width:65%}
+.hero-stage .metric-card-small{grid-template-columns:30px minmax(0,1fr) 55px}
+.hero-stage .metric-wave{width:55px}
+}
+@media(max-width:930px){
+.hero-grid.hero-grid-new{width:calc(100% - 50px);padding-top:111px;gap:26px}
+.hero-copy.hero-copy-new{display:grid;grid-template-columns:1fr;grid-template-rows:auto auto auto auto;row-gap:17px}
+.hero-copy-new .eyebrow{grid-column:1;grid-row:1}
+.hero-copy-new h1{grid-column:1;grid-row:2;font-size:clamp(51px,7.8vw,80px);max-width:840px}
+.hero-copy-new .hero-desc{grid-column:1;grid-row:3;max-width:690px;font-size:15px}
+.hero-copy-new .hero-actions{grid-column:1;grid-row:4;display:flex}
+.hero-grid.hero-grid-new>.hero-stage{grid-template-columns:minmax(0,1fr) minmax(0,1fr);grid-template-rows:auto minmax(490px,1fr) auto;min-height:0;padding:20px;gap:16px}
+.hero-stage .hero-profile{grid-column:1;grid-row:1;min-height:293px}
+.hero-stage .hero-metrics{grid-column:2;grid-row:1;align-self:stretch;width:100%;display:grid;grid-template-columns:1fr;gap:8px}
+.hero-stage .hero-figures{grid-column:1/-1;grid-row:2;min-height:490px;height:510px;width:100%}
+.hero-stage .hero-person{left:16%;bottom:0;width:34%;height:92%}
+.hero-stage .hero-twin-wrap{right:15%;bottom:0;width:39%;height:100%}
+.hero-stage .hero-summary{grid-column:1/-1;grid-row:3;display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,.85fr) minmax(0,.85fr);gap:12px;align-self:stretch}
+.hero-stage .pgx-hero-teaser{grid-column:1;min-height:150px;justify-content:center}
+.hero-stage .hero-summary>.summary-card{grid-column:auto;min-height:150px}
+.hero-stage .hero-summary::after{grid-column:1/-1}
+}
+@media(max-width:600px){
+.hero{padding-bottom:24px}
+.hero-grid.hero-grid-new{width:calc(100% - 30px);padding-top:96px;padding-bottom:18px;gap:22px}
+.hero-copy-new h1{font-size:clamp(39px,11.5vw,58px);line-height:1.04}
+.hero-copy-new .hero-desc{font-size:14px;line-height:1.65}
+.hero-copy-new .hero-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.hero-copy-new .btn{white-space:normal;text-align:center;line-height:1.35;padding:13px 10px;font-size:10px}
+.hero-grid.hero-grid-new>.hero-stage{display:flex;flex-direction:column;gap:13px;padding:14px;min-height:0;border-radius:21px}
+.hero-stage .hero-profile{width:100%;min-height:0;margin:0;padding:19px}
+.hero-stage .hero-metrics{order:3;display:grid;grid-template-columns:1fr 1fr;gap:8px;width:100%;margin:0}
+.hero-stage .metric-card-small{grid-template-columns:29px minmax(0,1fr);padding:10px 9px;min-height:63px}
+.hero-stage .metric-card-small .icon{width:28px;height:28px;font-size:15px}
+.hero-stage .metric-card-small .delta,.hero-stage .metric-wave{display:none}
+.hero-stage .metric-card-small strong{font-size:14px}
+.hero-stage .metric-card-small .label{font-size:8px}
+.hero-stage .hero-figures{order:2;width:100%;height:370px;min-height:370px;margin:0}
+.hero-stage .hero-person{left:-3%;bottom:0;width:57%;height:355px}
+.hero-stage .hero-twin-wrap{right:-2%;bottom:0;width:60%;height:370px}
+.hero-stage .hero-summary{order:4;display:grid;grid-template-columns:1fr 1fr;gap:8px;width:100%!important;margin:0!important}
+.hero-stage .pgx-hero-teaser{grid-column:1/-1;min-height:0;padding:15px}
+.hero-stage .hero-summary>.summary-card{grid-column:auto;min-height:134px;padding:12px 10px}
+.hero-stage .hero-summary::after{grid-column:1/-1;font-size:8px}
+.hero-stage .summary-card .summary-gauge{width:90px;height:90px}
+.hero-stage .summary-card .summary-gauge strong{font-size:19px}
+.hero-stage .hero-profile .profile-row{font-size:12px}
+}
+@media(max-width:360px){.hero-copy-new .hero-actions{grid-template-columns:1fr}.hero-stage .hero-figures{height:305px;min-height:305px}.hero-stage .hero-person{height:295px}.hero-stage .hero-twin-wrap{height:308px}.hero-stage .summary-card .summary-list{font-size:9px}}
+
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Preskoči na vsebino</a>
+<header class="navbar"><div class="container navinner">
+<a class="brand" href="#main" aria-label="MEDTWIN, na začetek"><span class="brand-mark" aria-hidden="true"></span><span class="brand-label">MEDTWIN</span></a>
+<nav class="navlinks" aria-label="Glavna navigacija"><a href="#platform">Platforma</a><a href="#lab">Digitalni dvojček</a><a href="#insurance">Za zavarovalnice</a><a href="#finance">ROI simulator</a></nav>
+<div class="nav-right"><div class="status"><i class="pulse-dot"></i> INTERAKTIVNI DEMO</div><a class="navcta" href="#lab">ODPRI DEMO ↗</a></div>
+</div></header>
+<main id="main">
+<section class="hero"><div class="container hero-grid hero-grid-new"><div class="hero-stage">
+  <div class="hero-profile glass hero-pulse">
+    <h3>Štefan Grašič</h3>
+    <div class="profile-rows">
+      <div class="profile-row"><span>Višina:</span><strong>183 cm</strong></div>
+      <div class="profile-row"><span>Teža:</span><strong>75 kg</strong></div>
+      <div class="profile-row"><span>Kronološka starost:</span><strong>22 let</strong></div>
+      <div class="profile-row highlight"><span>Biološka starost (demo):</span><strong>19,6 let</strong></div>
+    </div>
+    <div class="profile-age-delta">
+      <svg class="sparkline" viewBox="0 0 56 28" aria-hidden="true"><path d="M1 24 L11 13 L19 15 L27 5 L36 12 L45 7 L55 10" fill="none" stroke="#7df9e6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <div><strong>-2,4 let</strong><small>MLAJŠI OD KRONOLOŠKE STAROSTI</small></div>
+    </div>
+  </div>
+  <div class="hero-figures" aria-label="Stiliziran avatar Štefana Grašiča in interaktivni holografski digitalni dvojček">
+    <div class="hero-person">
+      <div class="avatar-shell">
+        <div class="avatar-scan"></div><span class="avatar-arc" aria-hidden="true"></span><span class="avatar-beam" aria-hidden="true"></span><span class="avatar-shadow" aria-hidden="true"></span>
+        <div class="avatar-badge">ŠTEFAN / HUMAN PROFILE</div>
+        <img src="assets/stefan_digital_avatar.png" alt="Stiliziran digitalni avatar Štefana Grašiča, ustvarjen na podlagi referenčne fotografije" />
+      </div>
+    </div>
+    <div class="hero-twin-wrap">
+      <div class="hero-visual" aria-label="Animiran tridimenzionalni prikaz holografskega človeškega telesa"><div class="holo-aura"></div><div class="holo-ellipse"></div><div class="holo-ellipse two"></div><div class="holo-ellipse three"></div><div class="holo-floor"></div><canvas id="heroCanvas" aria-hidden="true"></canvas><div class="corner-tag tag-top">MEDTWIN / DIGITAL HUMAN</div><div class="corner-tag tag-bot">LONGEVITY MODEL / 01</div><div class="floating-label top"><span class="tiny">TWIN LINK</span><strong><span style="color:#96ffec">●</span> SINHRONIZIRAN</strong></div><div class="floating-label left"><span class="tiny">SIGNAL MAPPING</span><strong>AKTIVNO</strong><svg class="mini-wave" viewBox="0 0 118 25"><path d="M0 13 L19 13 L25 7 L30 17 L38 3 L46 22 L53 12 L118 12" fill="none" stroke="#75f9e1" stroke-width="1.4"/></svg></div><div class="floating-label bottom"><span class="tiny">BIOLOŠKA STAROST</span><strong>19,6 let / -2,4</strong></div></div>
+    </div>
+  </div>
+  <div class="hero-metrics" aria-label="Ilustrativne sintetične meritve">
+    <div class="metric-card-small hero-pulse"><div class="icon">❤</div><div><span class="label">Srčni utrip</span><strong>56 bpm</strong></div><div><div class="delta">-12%</div><svg class="metric-wave" viewBox="0 0 82 28" aria-hidden="true"><path d="M2 18 L12 16 L20 11 L28 14 L36 7 L44 4 L52 6 L60 8 L70 3 L80 7" fill="none" stroke="#7df9e6" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></div></div>
+    <div class="metric-card-small"><div class="icon">◔</div><div><span class="label">VO2 max</span><strong>58 ml/kg/min</strong></div><div><div class="delta">+18%</div><svg class="metric-wave" viewBox="0 0 82 28" aria-hidden="true"><path d="M2 21 L10 18 L20 16 L30 9 L38 12 L46 6 L56 8 L65 4 L74 10 L80 7" fill="none" stroke="#7df9e6" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></div></div>
+    <div class="metric-card-small"><div class="icon">◉</div><div><span class="label">HRV</span><strong>72 ms</strong></div><div><div class="delta">+24%</div><svg class="metric-wave" viewBox="0 0 82 28" aria-hidden="true"><path d="M2 18 L12 12 L20 7 L30 10 L38 5 L48 9 L58 8 L66 3 L74 9 L80 6" fill="none" stroke="#7df9e6" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></div></div>
+    <div class="metric-card-small"><div class="icon">☾</div><div><span class="label">Kakovost spanca</span><strong>94 /100</strong></div><div><div class="delta">+16%</div><svg class="metric-wave" viewBox="0 0 82 28" aria-hidden="true"><path d="M2 20 L12 17 L20 10 L30 5 L38 9 L46 11 L56 4 L66 6 L74 14 L80 8" fill="none" stroke="#7df9e6" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></div></div>
+  </div>
+  <div class="hero-summary">
+    <a href="#pharmacogenetics" class="pgx-hero-teaser" aria-label="Odpri farmakogenetski modul">
+      <span class="pgx-hero-label"><span class="pgx-hero-gene">⟡</span> FARMAKOGENETIKA <span class="pgx-hero-demo">SINTETIČNI PRIMER</span></span>
+      <strong>CYP2C19 <span class="pgx-hero-mid">→</span> klopidogrel</strong>
+      <span class="pgx-hero-detail">Simulirana različica *1/*2 · različna aktivacija zdravila <span aria-hidden="true">↗</span></span>
+    </a>
+    <div class="summary-card"><div class="summary-label">Simulacija scenarijev</div><div class="summary-list"><div><span class="dot"></span>Sedanji življenjski slog</div><div><span class="dot"></span>Optimiziran režim</div><div><span class="dot"></span>Cilj dolgoživosti</div></div></div>
+    <div class="summary-card"><div class="summary-label">Biološka starost</div><div class="summary-gauge"><div class="gauge-inner"><strong>19,6</strong><span>let</span><em>-2,4</em></div></div></div>
+  </div>
+</div><div class="hero-copy hero-copy-new">
+<div class="eyebrow">MEDTWIN — digitalni dvojček človeka</div>
+<h1><span class="line">Umetnost in</span><span class="line">biologija <span class="gradient-text">dolgoživosti</span></span><span class="line">v enem modelu.</span></h1>
+<p class="hero-desc">MEDTWIN je nova generacija operacijskega sistema personalizirane preventive. Digitalni dvojček omogoča raziskovanje scenarijev, spreminjanje življenjskih navad in razumevanje trendov, še preden sprejmemo odločitve v resničnem življenju.</p>
+<div class="hero-actions"><a class="btn btn-primary" href="#lab">Razišči svoj digitalni dvojček <span class="arrow">↗</span></a><a class="btn btn-ghost" href="#insurance">Rešitve za zavarovalnice <span class="arrow">↗</span></a></div>
+
+</div></div><div class="hero-bottom"></div></section>
+<section class="metrics-ribbon" aria-label="Lastnosti sistema"><div class="container metrics-inner"><div class="metric-item"><strong>01 / SIGNAL</strong><span>Biometrija in zdravstveni kontekst</span></div><div class="metric-item"><strong>02 / TWIN</strong><span>Dinamični digitalni model</span></div><div class="metric-item"><strong>03 / SCENARIO</strong><span>Primerjava hipotetičnih poti</span></div><div class="metric-item"><strong>04 / ACTION</strong><span>Podprte preventivne odločitve</span></div></div></section>
+<section class="section pgx-section" id="pharmacogenetics">
+ <div class="container">
+  <div class="pgx-heading">
+   <div>
+    <div class="eyebrow">MEDTWIN / PRECISION INTELLIGENCE</div>
+    <h2>Pravo zdravilo.<br><span class="gradient-text">Prava biologija.</span></h2>
+    <p>Farmakogenetika raziskuje, kako genetske različice vplivajo na presnovo in odziv na zdravila. Izberi sintetičen primer in opazuj, kako bi digitalni dvojček razložil povezavo med genom, zdravilom in možnimi posledicami.</p>
+   </div>
+   <div class="pgx-sim-badge"><span class="pgx-badge-dot"></span> INTERAKTIVNI PGx DEMO <small>Ni genetski izvid Štefana Grašiča</small></div>
+  </div>
+  <div class="pgx-workspace">
+   <div class="pgx-molecular" aria-label="Animirana vizualizacija dvojne vijačnice DNK">
+    <div class="pgx-mol-top"><span>01 / MOLECULAR PROFILE</span><span>SYNTHETIC DEMO</span></div>
+    <div class="dna-orbit dna-orbit-one"></div><div class="dna-orbit dna-orbit-two"></div>
+    <svg id="pgxDna" class="pgx-dna" viewBox="0 0 360 440" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+      <defs><linearGradient id="strandA" x1="0" x2="1" y1="0" y2="0"><stop stop-color="#61bdff"/><stop offset="1" stop-color="#95fff1"/></linearGradient><linearGradient id="strandB" x1="0" x2="1" y1="0" y2="0"><stop stop-color="#aa8cff"/><stop offset="1" stop-color="#78e3ef"/></linearGradient></defs>
+      <g id="dnaRungs"></g>
+      <path id="dnaStrandA" stroke="url(#strandA)" stroke-width="4" fill="none" stroke-linecap="round"/>
+      <path id="dnaStrandB" stroke="url(#strandB)" stroke-width="4" fill="none" stroke-linecap="round"/>
+    </svg>
+    <div class="pgx-genotype">
+      <span>DEMONSTRACIJSKI GENOTIP</span>
+      <strong id="pgxGeneCode">CYP2C19</strong>
+      <em id="pgxVariant">*1/*2</em>
+    </div>
+    <div class="pgx-mol-bottom">DIGITAL PHARMACOGENOMICS / MODEL VIEW</div>
+   </div>
+   <div class="pgx-panel">
+    <div class="pgx-panel-top"><span>02 / MEDICATION RESPONSE</span><span class="pgx-panel-pill">IZMIŠLJEN PROFIL</span></div>
+    <h3>Kako se spremeni odgovor na zdravilo?</h3>
+    <p class="pgx-helper">Izberi zdravilo — genetski marker, hipotetični odziv in razlaga se takoj spremenijo.</p>
+    <div class="pgx-tabs" role="group" aria-label="Izberi zdravilo">
+      <button type="button" class="pgx-drug active" data-pgx="clopidogrel" aria-pressed="true">Klopidogrel</button>
+      <button type="button" class="pgx-drug" data-pgx="simvastatin" aria-pressed="false">Simvastatin</button>
+      <button type="button" class="pgx-drug" data-pgx="escitalopram" aria-pressed="false">Escitalopram</button>
+    </div>
+    <div class="pgx-interpretation" aria-live="polite">
+      <div class="pgx-kv"><span>Genetski marker</span><strong id="pgxMarker">CYP2C19 · *1/*2</strong></div>
+      <div class="pgx-kv"><span>Simuliran fenotip</span><strong id="pgxPhenotype">Vmesni presnavljalec</strong></div>
+      <div class="pgx-kv"><span>Hipotetičen odziv</span><strong id="pgxEffect">Zmanjšana aktivacija predzdravila</strong></div>
+    </div>
+    <div class="pgx-insight"><div class="pgx-insight-symbol">✳</div><div><strong id="pgxInsightTitle">Enako zdravilo. Drugačna biološka pot.</strong><p id="pgxInsightText">Različice gena CYP2C19 lahko vplivajo na pretvorbo klopidogrela v aktivno obliko. Ta primer prikazuje koncept, ne zdravstvenega priporočila.</p></div></div>
+    <p class="pgx-disclaimer"><span>!</span> Vsi navedeni genotipi in odzivi so ilustrativni; niso rezultat genetskega testiranja ali individualna priporočila za izbiro, menjavo ali odmerjanje zdravil. Klinično odločanje zahteva laboratorijsko analizo in strokovno presojo.</p>
+   </div>
+  </div>
+ </div>
+</section>
+<section class="section value" id="platform"><div class="container"><div class="section-intro"><div class="eyebrow">THE PARADIGM SHIFT</div><h2>Medicina vidi, kaj je.<br><span class="gradient-text">MEDTWIN raziskuje, kaj bi lahko bilo.</span></h2><p>Namesto enakega pristopa za vse: posameznik, njegov model in primerljive prihodnosti. Enoten konceptualni sloj, ki povezuje podatke, scenarije in preventivo.</p></div><div class="steps"><article class="step"><span class="step-number">01 — CONNECT</span><h3>Poveži signale.</h3><p>Biometrični, življenjski, laboratorijski in po potrebi genetski podatki tvorijo kontekst posameznika.</p></article><article class="step"><span class="step-number">02 — SIMULATE</span><h3>Preizkusi možnosti.</h3><p>Digitalni model omogoča primerjanje hipotetičnih preventivnih scenarijev namesto intuitivnega ugibanja.</p></article><article class="step"><span class="step-number">03 — PERSONALIZE</span><h3>Prilagodi pot.</h3><p>Ugotovitve postanejo razumljive usmeritve za pogovor s strokovnjaki in odgovorno preventivno ravnanje.</p></article></div></div></section>
+<div class="divider-art"></div>
+<section class="section lab" id="lab"><div class="container"><div class="lab-header"><div><div class="eyebrow">MEDTWIN / DIGITAL TWIN LAB</div><h2>Dotakni se <span class="gradient-text">prihodnosti.</span></h2></div><div><span class="simulation-stamp"><i class="pulse-dot"></i> INTERAKTIVNA SIMULACIJA</span><p class="lab-sub" style="margin:14px 0 0">Zavrti telo. Izberi organski sistem. Spremeni navade in premakni čas. Opazuj odziv sintetičnega modela.</p></div></div>
+<div class="lab-shell"><div class="lab-viewport"><div class="target-ring"></div><canvas id="labCanvas" aria-label="Interaktivni 3D model. Povleci vodoravno za obračanje telesa." tabindex="0"></canvas><div class="lab-view-head"><div><small>SUBJECT 001 / SYNTHETIC</small><strong id="organDisplay">Kardiovaskularni sistem</strong></div><span class="simulation-stamp" style="font-size:9px;padding:8px">SIMULACIJA</span></div><div class="lab-view-bot"><p>HOLOGRAPHIC HUMAN MODEL<br>Ne predstavlja dejanskega pacienta.</p><span class="rotate-hint">↔ POVLECI ZA ROTACIJO</span></div></div>
+<div class="lab-controls"><div class="control-card"><div class="control-title"><span>01 / SISTEM</span><span>IZBERI ORGANSKI SKLOP</span></div><div class="organ-selector" role="group" aria-label="Izberi organ"><button class="organ-btn active" data-organ="heart" aria-pressed="true">Srce</button><button class="organ-btn" data-organ="brain" aria-pressed="false">Možgani</button><button class="organ-btn" data-organ="lungs" aria-pressed="false">Pljuča</button><button class="organ-btn" data-organ="metabolism" aria-pressed="false">Presnova</button></div></div>
+<div class="control-card"><div class="control-title"><span>02 / ČASOVNICA</span><span>SINTETIČNI MODEL</span></div><div class="time-legend"><strong><span id="yearValue">10</span> <small>let v modelu</small></strong><span style="font-size:10px;color:#a3eddd" id="timeLabel">PROJEKCIJA / T+10</span></div><input class="range" id="yearRange" aria-label="Simulirani čas v letih" type="range" min="0" max="20" step="1" value="10"><div class="ticks"><span>DANES</span><span>+5 LET</span><span>+10 LET</span><span>+15 LET</span><span>+20 LET</span></div></div>
+<div class="control-card"><div class="control-title"><span>03 / ŽIVLJENJSKE NAVADE</span><span>PREMAKNI PARAMETRE</span></div><div class="habit-grid"><div class="habit"><div class="habit-label"><span>Spanje</span><strong id="sleepVal">8 h</strong></div><input class="range" id="sleep" aria-label="Ure spanja" type="range" min="4" max="10" step=".5" value="8"></div><div class="habit"><div class="habit-label"><span>Aktivnost</span><strong id="activityVal">7/10</strong></div><input class="range" id="activity" aria-label="Indeks aktivnosti" type="range" min="0" max="10" step="1" value="7"></div><div class="habit"><div class="habit-label"><span>Stres</span><strong id="stressVal">3/10</strong></div><input class="range" id="stress" aria-label="Indeks stresa" type="range" min="0" max="10" step="1" value="3"></div><div class="habit"><div class="habit-label"><span>Prehrana</span><strong id="nutritionVal">7/10</strong></div><input class="range" id="nutrition" aria-label="Indeks prehrane" type="range" min="0" max="10" step="1" value="7"></div></div></div>
+<div class="lab-readout"><div class="readout"><small>SCENARIJSKI INDEKS / T+<span class="linkedYear">10</span></small><strong><span id="scoreValue">—</span> <em>/ 100</em></strong></div><div class="readout"><small>RAZLIKA GLEDE NA REFERENCO</small><strong id="deltaValue">—</strong></div></div></div></div>
+<div class="simulation-foot"><strong>Transparentno o modelu.</strong> Vsi prikazani podatki, indeksi in krivulje so sintetični ter ilustrativni. Spremembe temeljijo na demonstracijski matematični funkciji, ne na medicinsko validiranem algoritmu. Ta prototip ne diagnosticira, ne napoveduje bolezni in ne daje zdravstvenih priporočil.</div></div></section>
+<section class="section insurance" id="insurance"><div class="container"><div class="insurance-top"><div><div class="eyebrow">MEDTWIN / INSURANCE INTELLIGENCE</div><h2>Naslednja generacija<br><span class="gradient-text">zdravstvenega zavarovanja.</span></h2></div><p>Iz modela, ki financira posledice, v model, ki investira v preventivo. MEDTWIN je zasnovan kot digitalna storitev, ki jo lahko zavarovalnica ponuja pod svojo blagovno znamko.</p></div><div class="tiers">
+<article class="tier" tabindex="0" role="button" aria-label="Izberi paket Essential" aria-pressed="false" data-tier="essential"><div class="tier-head"><span class="tier-index">01 / FOUNDATION</span></div><h3>Essential</h3><p class="tier-summary">Osebni preventivni kompas. Vstopna točka v podatkovno podprto skrb za zdravje.</p><div class="tier-divider"></div><ul><li><span class="tick">↗</span> Preventivni digitalni profil</li><li><span class="tick">↗</span> Podatki iz nosljivih naprav</li><li><span class="tick">↗</span> Simulacije življenjskih navad</li><li><span class="tick">↗</span> Personalizirane vsebine</li></ul><div class="tier-action">IZBERI ZA SIMULATOR ↗</div></article>
+<article class="tier selected featured" tabindex="0" role="button" aria-label="Izberi paket Advanced" aria-pressed="true" data-tier="advanced"><div class="tier-head"><span class="tier-index">02 / INTELLIGENCE</span><span class="tier-badge">PRIPOROČENA OSNOVA</span></div><h3>Advanced</h3><p class="tier-summary">Globlja preventivna inteligenca za člane, ki želijo aktivno oblikovati svoje zdravje.</p><div class="tier-divider"></div><ul><li><span class="tick">↗</span> Vse iz paketa Essential</li><li><span class="tick">↗</span> Vključevanje laboratorijskih izvidov</li><li><span class="tick">↗</span> Razširjeni organski scenariji</li><li><span class="tick">↗</span> Dolgoročno spremljanje profila</li><li><span class="tick">↗</span> Preventivni navigacijski program</li></ul><div class="tier-action">IZBRANO ZA SIMULATOR ✓</div></article>
+<article class="tier" tabindex="0" role="button" aria-label="Izberi paket Ultimate" aria-pressed="false" data-tier="ultimate"><div class="tier-head"><span class="tier-index">03 / PRECISION</span></div><h3>Ultimate</h3><p class="tier-summary">Najvišja stopnja personalizacije — za prihodnost precizne preventivne medicine.</p><div class="tier-divider"></div><ul><li><span class="tick">↗</span> Vse iz paketa Advanced</li><li><span class="tick">↗</span> Farmakogenomski profil*</li><li><span class="tick">↗</span> Izbrana genetska tveganja*</li><li><span class="tick">↗</span> Strokovna interpretacija podatkov*</li><li><span class="tick">↗</span> Premium preventivna navigacija</li></ul><div class="tier-action">IZBERI ZA SIMULATOR ↗</div></article>
+</div><p class="concept-note">* Konceptualni obseg paketa, odvisen od regulativnih zahtev, privolitev, strokovne validacije in zdravstvenih partnerjev. Paketi niso komercialno razpoložljiva storitev.</p></div></section>
+<section class="section finance" id="finance"><div class="container"><div class="finance-head"><div><div class="eyebrow">THE BUSINESS CASE / MODEL IT YOURSELF</div><h2>Preventiva dobi<br><span class="gradient-text">ekonomsko logiko.</span></h2></div><p>Spremeni parametre portfelja. Primerjaj scenarije. V realnem času preveri, kdaj hipotetični prihranki lahko presegajo investicijo v program.</p></div><div class="fin-grid"><div class="fin-params"><div class="fin-card-title"><span>01 / PREDPOSTAVKE MODELA</span><small id="selectedPlanText">PAKET: ADVANCED</small></div><div class="scenarios" aria-label="Scenarij modelnega učinka"><button class="scenario-btn" data-scenario="conservative" aria-pressed="false">Previdni</button><button class="scenario-btn active" data-scenario="base" aria-pressed="true">Osnovni</button><button class="scenario-btn" data-scenario="optimistic" aria-pressed="false">Ambiciozni</button></div><div class="fin-control"><div class="fin-label"><span>Velikost zavarovanega portfelja</span><strong id="membersVal">100.000</strong></div><input class="range" id="members" type="range" min="10000" max="500000" step="10000" value="100000" aria-label="Število zavarovancev"></div><div class="fin-control"><div class="fin-label"><span>Vključenost v program</span><strong id="uptakeVal">35 %</strong></div><input class="range" id="uptake" type="range" min="10" max="90" step="5" value="35" aria-label="Delež vključenih zavarovancev"></div><div class="fin-control"><div class="fin-label"><span>Hipotetično zmanjšanje dogodkov</span><strong id="reductionVal">12 %</strong></div><input class="range" id="reduction" type="range" min="0" max="30" step="1" value="12" aria-label="Hipotetično relativno zmanjšanje dogodkov"></div><div class="fin-control"><div class="fin-label"><span>Povprečni strošek dogodka</span><strong id="eventCostVal">12.500 €</strong></div><input class="range" id="eventCost" type="range" min="3000" max="30000" step="500" value="12500" aria-label="Povprečni strošek dogodka v evrih"></div><div class="fin-footnote">Fiksni demonstracijski predpostavki: letna pojavnost obravnavanih dogodkov <strong>16 %</strong> med vključenimi; mesečni strošek programa na vključenega člana <strong id="planPriceText">12 €</strong>. Vse vrednosti so izmišljene in jih je treba v resničnem pilotu empirično oceniti.</div></div>
+<div class="fin-results"><div class="fin-card-title"><span>02 / FINANČNA SIMULACIJA</span><small>12-MESEČNI HORIZONT</small></div><div class="financial-hero">Hipotetični letni neto učinek<strong id="netResult">+3,36 mio €</strong><p id="resultExplainer">Prikaz ni napoved prihrankov ali donosnosti.</p></div><div class="financial-divider"></div><div class="finance-numbers"><div class="finance-number"><small>Modelni bruto prihranek</small><strong id="grossValue">8,40 mio €</strong></div><div class="finance-number"><small>Strošek programa / leto</small><strong id="programValue">5,04 mio €</strong></div><div class="finance-number"><small>Modelna donosnost (ROI)</small><strong id="roiValue">67 %</strong></div></div><div class="finance-bars"><div class="bar-item"><div class="bar-label"><span>Hipotetični bruto prihranek</span><strong id="barGrossText">8,40 mio €</strong></div><div class="bar-track"><b id="grossBar"></b></div></div><div class="bar-item"><div class="bar-label"><span>Strošek izvajanja programa</span><strong id="barProgramText">5,04 mio €</strong></div><div class="bar-track"><b id="programBar"></b></div></div></div><div class="finance-disclaimer" id="breakEvenText">Prelomna točka: 7,2 % relativnega zmanjšanja dogodkov ob navedenih predpostavkah.</div></div></div>
+<div class="fin-bottom"><div class="fin-bottom-item"><strong>JASNO LOČENE PREDPOSTAVKE</strong>Izračun = število vključenih × pojavnost × relativno zmanjšanje × strošek dogodka − letni strošek programa.</div><div class="fin-bottom-item"><strong>BREZ NEDOKAZANIH TRDITEV</strong>Scenariji so ilustrativni. MEDTWIN s tem demom ne dokazuje zdravstvenih ali finančnih učinkov.</div><div class="fin-bottom-item"><strong>OD MODELA DO DOKAZOV</strong>Dejanski pilot mora preveriti varnost, klinično uporabnost, privolitve, ekonomiko in merljive izide.</div></div></div></section>
+<section class="close"><div class="container"><div class="eyebrow">THE FUTURE HAS A TWIN.</div><h2>Človek živi.<br><span class="gradient-text">Dvojček raziskuje možnosti.</span></h2><p>Od odzivanja na bolezni k boljšim preventivnim odločitvam. MEDTWIN — nova zamisel o infrastrukturi zdravja, oživljena v interaktivnem prototipu, ki ga lahko preizkusiš zdaj.</p><a class="btn btn-primary" href="#lab">Ponovno zaženi demo <span class="arrow">↗</span></a></div></section>
+</main><footer class="footer"><div class="container footer-inner"><a class="brand" href="#main"><span class="brand-mark"></span><span class="brand-label">MEDTWIN</span></a><span>© 2026 MEDTWIN · Interaktivni konceptni prototip</span><div class="footer-links"><a href="#lab">Digital Twin Lab</a><a href="#insurance">Paketi</a><a href="#finance">Finančni model</a></div></div></footer>
+<script>
+(()=>{'use strict';
+const $=id=>document.getElementById(id), $$=q=>Array.from(document.querySelectorAll(q));
+const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
+const fmtNum=v=>new Intl.NumberFormat('sl-SI',{maximumFractionDigits:0}).format(v);
+const fmtMoney=v=>new Intl.NumberFormat('sl-SI',{maximumFractionDigits:2,minimumFractionDigits:2}).format(v/1e6)+' mio €';
+const bodyParts=[
+ {p:[0,4.13,0],r:[.295,.387,.28],tag:'head'},
+ {p:[0,3.66,0],r:[.153,.24,.16],tag:'neck'},
+ {p:[0,3.05,0],r:[.62,.69,.34],tag:'chest'},
+ {p:[0,2.49,0],r:[.445,.49,.31],tag:'abdomen'},
+ {p:[0,2.085,0],r:[.47,.35,.32],tag:'pelvis'},
+ {a:[-.65,3.36,0],b:[-.82,2.56,.01],r:[.188,.155],tag:'arm'},
+ {a:[.65,3.36,0],b:[.82,2.56,.01],r:[.188,.155],tag:'arm'},
+ {a:[-.82,2.59,.01],b:[-.95,1.84,.11],r:[.142,.112],tag:'forearm'},
+ {a:[.82,2.59,.01],b:[.95,1.84,.11],r:[.142,.112],tag:'forearm'},
+ {p:[-.96,1.69,.10],r:[.12,.18,.095],tag:'hand'},
+ {p:[.96,1.69,.10],r:[.12,.18,.095],tag:'hand'},
+ {a:[-.26,1.96,0],b:[-.30,1.13,.035],r:[.275,.205],tag:'thigh'},
+ {a:[.26,1.96,0],b:[.30,1.13,.035],r:[.275,.205],tag:'thigh'},
+ {a:[-.30,1.12,.035],b:[-.31,.26,.08],r:[.172,.11],tag:'shin'},
+ {a:[.30,1.12,.035],b:[.31,.26,.08],r:[.172,.11],tag:'shin'},
+ {p:[-.31,.15,.18],r:[.16,.12,.29],tag:'foot'},
+ {p:[.31,.15,.18],r:[.16,.12,.29],tag:'foot'}
+];
+const vessels=[
+ [[-.10,3.13,.39],[-.07,3.46,.24],[0,3.77,.18],[0,4.05,.31]],
+ [[-.10,3.13,.39],[-.39,3.38,.30],[-.65,3.34,.16],[-.78,2.98,.16],[-.88,2.50,.18],[-.94,1.95,.18]],
+ [[-.10,3.13,.39],[.36,3.39,.30],[.66,3.33,.16],[.78,2.98,.18],[.87,2.49,.18],[.95,1.96,.18]],
+ [[-.10,3.13,.39],[0,2.78,.34],[0,2.35,.35],[-.22,1.99,.25],[-.29,1.47,.25],[-.3,1.02,.19],[-.31,.33,.18]],
+ [[-.10,3.13,.39],[0,2.78,.34],[0,2.35,.35],[.21,1.99,.25],[.29,1.47,.25],[.3,1.02,.19],[.31,.33,.18]],
+ [[0,3.0,.35],[.32,3.16,.30],[.40,3.07,.22]],
+ [[0,3.0,.35],[-.32,3.15,.30],[-.40,3.07,.22]]
+];
+const organPoints={heart:[-.105,3.16,.42],brain:[0,4.15,.27],lungs:[.22,3.13,.37],metabolism:[0,2.58,.35]};
+const organNames={heart:'Kardiovaskularni sistem',brain:'Nevrološki sistem',lungs:'Dihalni sistem',metabolism:'Presnovni sistem'};
+const meshes=bodyParts.map(part=>{
+ let verts=[],rings=16,cols=20;
+ for(let i=0;i<=rings;i++){
+  const phi=(i/rings)*Math.PI;
+  for(let j=0;j<=cols;j++){
+   const theta=(j/cols)*Math.PI*2;
+   const sx=Math.sin(phi)*Math.cos(theta),sy=Math.cos(phi),sz=Math.sin(phi)*Math.sin(theta);
+   let x,y,z;
+   if(part.p){x=part.p[0]+part.r[0]*sx;y=part.p[1]+part.r[1]*sy;z=part.p[2]+part.r[2]*sz;}
+   else {const from=part.a,to=part.b,dx=to[0]-from[0],dy=to[1]-from[1],dz=to[2]-from[2],len=Math.hypot(dx,dy,dz),ux=dx/len,uy=dy/len,uz=dz/len;
+    const sideX=Math.abs(uy)>.8?1:0,sideY=Math.abs(uy)>.8?0:1;
+    let cx=uy*0-uz*sideY,cy=uz*sideX-ux*0,cz=ux*sideY-uy*sideX;let cl=Math.hypot(cx,cy,cz)||1;cx/=cl;cy/=cl;cz/=cl;
+    const bx=uy*cz-uz*cy,by=uz*cx-ux*cz,bz=ux*cy-uy*cx;
+    const t=(1-sy)/2,rr=part.r[0]*(1-t)+part.r[1]*t;
+    x=from[0]+dx*t+rr*(cx*Math.cos(theta)+bx*Math.sin(theta))*Math.sin(phi);
+    y=from[1]+dy*t+rr*(cy*Math.cos(theta)+by*Math.sin(theta))*Math.sin(phi);
+    z=from[2]+dz*t+rr*(cz*Math.cos(theta)+bz*Math.sin(theta))*Math.sin(phi);
+   }
+   verts.push([x,y,z]);
+  }
+ }
+ return {verts,rings,cols,part};
+});
+const interpolate=(pts,t)=>{let u=clamp(t,0,1)*(pts.length-1),idx=Math.min(pts.length-2,Math.floor(u)),f=u-idx;let a=pts[idx],b=pts[idx+1];return [a[0]+(b[0]-a[0])*f,a[1]+(b[1]-a[1])*f,a[2]+(b[2]-a[2])*f]};
+class Hologram{
+ constructor(canvas,hero=false){this.canvas=canvas;this.ctx=canvas.getContext('2d',{alpha:true});this.hero=hero;this.yaw=hero?-.18:.17;this.pitch=-.02;this.active='heart';this.time=10;this.drag=false;this.lastX=0;this.lastY=0;this.resize();new ResizeObserver(()=>this.resize()).observe(canvas);if(!hero){canvas.addEventListener('pointerdown',e=>{this.drag=true;this.lastX=e.clientX;this.lastY=e.clientY;canvas.setPointerCapture(e.pointerId)});canvas.addEventListener('pointermove',e=>{if(!this.drag)return;this.yaw+=(e.clientX-this.lastX)*.009;this.pitch=clamp(this.pitch+(e.clientY-this.lastY)*.003,-.25,.25);this.lastX=e.clientX;this.lastY=e.clientY});canvas.addEventListener('pointerup',()=>this.drag=false);canvas.addEventListener('pointercancel',()=>this.drag=false);canvas.addEventListener('keydown',e=>{if(e.key==='ArrowLeft'||e.key==='ArrowRight'){e.preventDefault();this.yaw+=(e.key==='ArrowLeft'?-.15:.15);}})}Hologram.instances.push(this)}
+ resize(){const r=this.canvas.getBoundingClientRect();this.w=Math.max(1,r.width);this.h=Math.max(1,r.height);let dpr=Math.min(window.devicePixelRatio||1,1.8);this.canvas.width=Math.floor(this.w*dpr);this.canvas.height=Math.floor(this.h*dpr);this.ctx.setTransform(dpr,0,0,dpr,0,0);this.scale=Math.min(this.h/(this.hero?5.35:5.2),this.w/(this.hero?3.15:3.4));this.cx=this.w*(this.hero?.54:.50);this.cy=this.h*(this.hero?.535:.515)}
+ project(p){let ca=Math.cos(this.yaw),sa=Math.sin(this.yaw),cp=Math.cos(this.pitch),sp=Math.sin(this.pitch),x=p[0]*ca+p[2]*sa,z=-p[0]*sa+p[2]*ca,y=(p[1]-2.27)*cp-z*sp;z=(p[1]-2.27)*sp+z*cp;const perspective=5.5/(5.5-z*.24);return [this.cx+x*this.scale*perspective,this.cy-y*this.scale*perspective,z,perspective]}
+ draw(t){let ctx=this.ctx,w=this.w,h=this.h;if(w<=1||h<=1)return;ctx.clearRect(0,0,w,h);const sec=t/1000;
+ // Ghosted axial guides
+ ctx.save();ctx.strokeStyle='rgba(85,164,203,.12)';ctx.lineWidth=.7;let rr=this.scale*.86;ctx.beginPath();ctx.ellipse(this.cx,this.cy,rr*.92,rr*2.18,0,0,Math.PI*2);ctx.stroke();ctx.beginPath();ctx.moveTo(this.cx,this.cy-2.34*this.scale);ctx.lineTo(this.cx,this.cy+2.31*this.scale);ctx.stroke();ctx.restore();
+ for(const mesh of meshes){const n=mesh.cols+1;const projected=mesh.verts.map(p=>this.project(p));const part=mesh.part;const linesFront=[];ctx.lineWidth=.62;for(let i=1;i<mesh.rings;i++)for(let j=0;j<mesh.cols;j++){const a=projected[i*n+j],b=projected[i*n+j+1];let al=clamp((a[2]+.65)/1.45,.06,.75);ctx.strokeStyle=`rgba(79,198,235,${al*.27})`;ctx.beginPath();ctx.moveTo(a[0],a[1]);ctx.lineTo(b[0],b[1]);ctx.stroke()}for(let j=0;j<=mesh.cols;j+=2)for(let i=0;i<mesh.rings;i++){const a=projected[i*n+j],b=projected[(i+1)*n+j];let al=clamp((a[2]+.6)/1.4,.04,.9);ctx.strokeStyle=`rgba(101,211,244,${al*.32})`;ctx.beginPath();ctx.moveTo(a[0],a[1]);ctx.lineTo(b[0],b[1]);ctx.stroke()}
+ for(let i=1;i<mesh.rings;i++)for(let j=0;j<mesh.cols;j+=2){const q=projected[i*n+j],a=clamp((q[2]+.7)/1.4,.04,.95),blink=Math.sin(sec*.75+q[0]*.021+q[1]*.04)*.15+.85;ctx.fillStyle=`rgba(133,242,255,${a*.68*blink})`;ctx.fillRect(q[0],q[1],a>.5?1.5:.85,a>.5?1.5:.85)}
+ }
+ // Vascular branches with passing photons
+ vessels.forEach((v,vi)=>{const pts=[];for(let k=0;k<=42;k++)pts.push(this.project(interpolate(v,k/42)));ctx.beginPath();pts.forEach((p,i)=>i?ctx.lineTo(p[0],p[1]):ctx.moveTo(p[0],p[1]));ctx.strokeStyle='rgba(66,223,237,.15)';ctx.lineWidth=3;ctx.stroke();ctx.strokeStyle='rgba(109,255,237,.49)';ctx.lineWidth=.82;ctx.stroke();const phase=(sec*(this.hero?.17:.11)+vi*.19)%1;for(let pi=0;pi<2;pi++){const position=(phase+pi*.50)%1;const p=this.project(interpolate(v,position));let radius=(pi===0?3.7:2.6);const glow=ctx.createRadialGradient(p[0],p[1],0,p[0],p[1],radius*5);glow.addColorStop(0,'rgba(221,255,255,.87)');glow.addColorStop(.24,'rgba(108,255,234,.72)');glow.addColorStop(1,'rgba(42,204,254,0)');ctx.fillStyle=glow;ctx.beginPath();ctx.arc(p[0],p[1],radius*5,0,Math.PI*2);ctx.fill();ctx.fillStyle='rgba(231,255,250,.9)';ctx.beginPath();ctx.arc(p[0],p[1],radius,0,Math.PI*2);ctx.fill()}});
+ // Selected organ + thoracic contours
+ if(!this.hero){const p=this.project(organPoints[this.active]);const pulse=1+Math.sin(sec*2.5)*.08;const r=this.active==='lungs'?28:this.active==='brain'?26:19;ctx.save();const gradient=ctx.createRadialGradient(p[0],p[1],0,p[0],p[1],r*pulse*2.5);gradient.addColorStop(0,'rgba(191,255,243,.42)');gradient.addColorStop(.4,'rgba(78,231,222,.15)');gradient.addColorStop(1,'rgba(20,196,216,0)');ctx.fillStyle=gradient;ctx.beginPath();ctx.arc(p[0],p[1],r*pulse*2.5,0,Math.PI*2);ctx.fill();ctx.strokeStyle='#a4fff0';ctx.shadowColor='#66f7e7';ctx.shadowBlur=17;ctx.lineWidth=1.6;ctx.beginPath();ctx.arc(p[0],p[1],r*pulse,0,Math.PI*2);ctx.stroke();ctx.shadowBlur=0;ctx.setLineDash([3,5]);ctx.strokeStyle='rgba(143,250,239,.55)';ctx.beginPath();ctx.arc(p[0],p[1],r*1.4,0,Math.PI*2);ctx.stroke();ctx.setLineDash([]);ctx.beginPath();ctx.moveTo(p[0]+r*1.4,p[1]);ctx.lineTo(Math.min(w-108,p[0]+r*3.0),p[1]-26);ctx.lineTo(Math.min(w-38,p[0]+r*3.0+35),p[1]-26);ctx.strokeStyle='rgba(117,246,223,.5)';ctx.stroke();ctx.fillStyle='#afffee';ctx.font='bold 9px Inter, sans-serif';ctx.fillText(this.active.toUpperCase(),Math.min(w-115,p[0]+r*3.0),p[1]-34);ctx.restore()}
+ else {const p=this.project([-.10,3.13,.39]);const gl=ctx.createRadialGradient(p[0],p[1],0,p[0],p[1],48);gl.addColorStop(0,'rgba(166,255,243,.25)');gl.addColorStop(1,'rgba(22,212,240,0)');ctx.fillStyle=gl;ctx.beginPath();ctx.arc(p[0],p[1],48,0,7);ctx.fill()}
+ // Feet grounding halo
+ const foot=this.project([0,.07,.1]);ctx.strokeStyle='rgba(100,241,230,.27)';ctx.lineWidth=1;ctx.beginPath();ctx.ellipse(foot[0],foot[1]+8,Math.min(112,this.scale*.91),12,0,0,7);ctx.stroke();
+ }
+ static animate(t){if(!document.hidden){Hologram.instances.forEach(h=>{if(!h.drag){h.yaw+=(h.hero?.00031:.00010)*16}h.draw(t)})}requestAnimationFrame(Hologram.animate)}
+}Hologram.instances=[];
+const heroHolo=new Hologram($('heroCanvas'),true),labHolo=new Hologram($('labCanvas'),false);requestAnimationFrame(Hologram.animate);
+
+// Farmakogenetska demonstracija: sintetični genotipi; no healthcare advice.
+const pgxExamples={
+ clopidogrel:{gene:'CYP2C19',variant:'*1/*2',phenotype:'Vmesni presnavljalec',response:'Zmanjšana aktivacija predzdravila',title:'Enako zdravilo. Drugačna biološka pot.',description:'Različice CYP2C19 lahko vplivajo na pretvorbo klopidogrela v aktivno obliko. Prikaz je ilustrativen in ne določa zdravljenja.'},
+ simvastatin:{gene:'SLCO1B1',variant:'c.521T>C',phenotype:'Zmanjšana funkcija prenašalca',response:'Možna večja sistemska izpostavljenost',title:'Transport zdravil je del osebne biologije.',description:'Različice SLCO1B1 lahko vplivajo na prenos nekaterih statinov v jetra in njihovo izpostavljenost v telesu. Primer ni priporočilo za izbiro ali odmerek.'},
+ escitalopram:{gene:'CYP2C19',variant:'*1/*17',phenotype:'Hitri presnavljalec',response:'Možna spremenjena koncentracija zdravila',title:'Presnova je lahko osebna.',description:'Različice CYP2C19 lahko vplivajo na presnovo escitaloprama. Klinična presoja upošteva še druge dejavnike in strokovne smernice.'}
+};
+function initPgx(){
+ const a=document.getElementById('dnaStrandA'),b=document.getElementById('dnaStrandB'),r=document.getElementById('dnaRungs');
+ if(a&&b&&r){let d1='',d2='',rungs='';for(let i=0;i<=180;i++){const y=12+i*2.3;const ang=i*.105;const x1=180+55*Math.sin(ang),x2=180-55*Math.sin(ang);d1+=(i?' L':'M')+x1.toFixed(1)+','+y.toFixed(1);d2+=(i?' L':'M')+x2.toFixed(1)+','+y.toFixed(1)}
+ for(let i=0;i<30;i++){const y=15+i*13.8;const ang=i*.63;const x1=180+55*Math.sin(ang),x2=180-55*Math.sin(ang);const opacity=(.25+.65*Math.abs(Math.cos(ang))).toFixed(2);rungs+=`<line x1="${x1.toFixed(1)}" y1="${y.toFixed(1)}" x2="${x2.toFixed(1)}" y2="${y.toFixed(1)}" stroke="${i%2?'#bc93ff':'#7bf3f1'}" stroke-width="2" opacity="${opacity}"/>`}
+ a.setAttribute('d',d1);b.setAttribute('d',d2);r.innerHTML=rungs;
+ }
+ document.querySelectorAll('.pgx-drug').forEach(btn=>btn.addEventListener('click',()=>{
+ const key=btn.dataset.pgx,d=pgxExamples[key];if(!d)return;
+ document.querySelectorAll('.pgx-drug').forEach(el=>{const active=el===btn;el.classList.toggle('active',active);el.setAttribute('aria-pressed',String(active))});
+ const fields={pgxGeneCode:d.gene,pgxVariant:d.variant,pgxMarker:d.gene+' · '+d.variant,pgxPhenotype:d.phenotype,pgxEffect:d.response,pgxInsightTitle:d.title,pgxInsightText:d.description};
+ Object.entries(fields).forEach(([id,value])=>{const el=document.getElementById(id);if(el)el.textContent=value});
+ }));
+}
+initPgx();
+
+// DIGITAL TWIN SIMULATOR: explicit toy model, no clinical prediction.
+const organs={heart:{label:'kardiovaskularni sistem',base:76,slope:.90,sensitivity:1.1},brain:{label:'nevrološki sistem',base:74,slope:.62,sensitivity:1.05},lungs:{label:'dihalni sistem',base:81,slope:.73,sensitivity:.85},metabolism:{label:'presnovni sistem',base:70,slope:1.05,sensitivity:1.3}};
+let organ='heart';const habits=['sleep','activity','stress','nutrition'];
+const values=()=>Object.fromEntries(habits.map(key=>[key,+$(key).value]));
+const sample=(year,changed)=>{const v=values(),o=organs[organ];const base=o.base-o.slope*year-.008*year*year;const effect=((v.sleep-7)*2.2+(v.activity-4)*1.6+(5-v.stress)*1.9+(v.nutrition-6)*1.2)*o.sensitivity*(1-Math.exp(-year/5));return clamp(base+(changed?effect:0),15,99)};
+const pstyle=e=>{const a=+e.min,b=+e.max;e.style.setProperty('--p',((+e.value-a)/(b-a)*100).toFixed(1)+'%')};
+function renderChart(){if(!$('activePath')||!$('chartGrid')||!$('refPath')||!$('scenarioFill')||!$('activeGlow')||!$('timeMarker')||!$('activeDot')) return; const W=1050,H=158,l=40,r=15,b=13,t=8;const X=y=>l+y/20*(W-l-r);const Y=v=>t+(100-v)/70*(H-t-b);const curve=changed=>{let d='';for(let y=0;y<=20;y+=.5)d+=(d?' L':'M')+X(y).toFixed(2)+' '+Y(sample(y,changed)).toFixed(2);return d};const scenario=curve(true);$('activePath').setAttribute('d',scenario);$('activeGlow').setAttribute('d',scenario);$('refPath').setAttribute('d',curve(false));$('scenarioFill').setAttribute('d',scenario+` L${X(20)} ${H-b} L${X(0)} ${H-b} Z`);const year=+$('yearRange').value;const px=X(year),py=Y(sample(year,true));$('timeMarker').setAttribute('x1',px);$('timeMarker').setAttribute('x2',px);$('activeDot').setAttribute('cx',px);$('activeDot').setAttribute('cy',py)}
+const grid=$('chartGrid');if(grid){for(let n=0;n<4;n++){const y=11+n*43;const ln=document.createElementNS('http://www.w3.org/2000/svg','line');ln.setAttribute('x1','40');ln.setAttribute('x2','1035');ln.setAttribute('y1',y);ln.setAttribute('y2',y);ln.setAttribute('stroke','rgba(146,190,218,.14)');grid.appendChild(ln)}}
+function updateLab(){const y=+$('yearRange').value,score=sample(y,true),baseline=sample(y,false),delta=score-baseline;labHolo.active=organ;labHolo.time=y;$('yearValue').textContent=y;$('timeLabel').textContent='PROJEKCIJA / T+'+y;$$('.linkedYear').forEach(el=>el.textContent=y);$('scoreValue').textContent=Math.round(score);$('deltaValue').textContent=(delta>=0?'+':'')+delta.toFixed(1).replace('.',',')+' t.';$('organDisplay').textContent=organNames[organ];if($('chartTitle')) $('chartTitle').textContent='Sintetična časovnica · '+organs[organ].label;const v=values();$('sleepVal').textContent=v.sleep.toString().replace('.',',')+' h';$('activityVal').textContent=v.activity+'/10';$('stressVal').textContent=v.stress+'/10';$('nutritionVal').textContent=v.nutrition+'/10';[...habits,'yearRange'].forEach(x=>pstyle($(x)));renderChart()}
+$$('.organ-btn').forEach(btn=>btn.addEventListener('click',()=>{organ=btn.dataset.organ;$$('.organ-btn').forEach(b=>{const is=b===btn;b.classList.toggle('active',is);b.setAttribute('aria-pressed',is)});updateLab()}));[...habits,'yearRange'].forEach(id=>$(id).addEventListener('input',updateLab));updateLab();
+// FINANCE SIMULATOR: arithmetic only; no claims of effectiveness.
+const plans={essential:{price:7,name:'ESSENTIAL'},advanced:{price:12,name:'ADVANCED'},ultimate:{price:24,name:'ULTIMATE'}};let plan='advanced',scenario='base';const scen={conservative:5,base:12,optimistic:20};
+function updateFin(){const n=+$('members').value,u=+$('uptake').value/100,rel=+$('reduction').value/100,cost=+$('eventCost').value;const enrolled=n*u,rate=.16,price=plans[plan].price,baselineEvents=enrolled*rate,gross=baselineEvents*rel*cost,program=enrolled*price*12,net=gross-program,roi=program?net/program*100:0,breakEven=program/(baselineEvents*cost)*100;const v=$('netResult');v.textContent=(net>=0?'+':'−')+fmtMoney(Math.abs(net));v.classList.toggle('negative',net<0);$('grossValue').textContent=fmtMoney(gross);$('programValue').textContent=fmtMoney(program);$('roiValue').textContent=(roi>=0?'+':'')+fmtNum(Math.round(roi))+' %';$('resultExplainer').textContent=fmtNum(Math.round(enrolled))+' vključenih · '+fmtNum(Math.round(baselineEvents*rel))+' hipotetično preprečenih dogodkov';$('barGrossText').textContent=fmtMoney(gross);$('barProgramText').textContent=fmtMoney(program);const max=Math.max(gross,program,1);$('grossBar').style.width=(gross/max*100)+'%';$('programBar').style.width=(program/max*100)+'%';$('breakEvenText').textContent='Prelomna točka: '+breakEven.toFixed(1).replace('.',',')+' % relativnega zmanjšanja dogodkov ob navedenih sintetičnih predpostavkah.';$('membersVal').textContent=fmtNum(n);$('uptakeVal').textContent=fmtNum(u*100)+' %';$('reductionVal').textContent=fmtNum(rel*100)+' %';$('eventCostVal').textContent=fmtNum(cost)+' €';$('planPriceText').textContent=price+' €';$('selectedPlanText').textContent='PAKET: '+plans[plan].name;['members','uptake','reduction','eventCost'].forEach(x=>pstyle($(x)))}
+function selectPlan(key){plan=key;$$('.tier').forEach(el=>{const selected=el.dataset.tier===key;el.classList.toggle('selected',selected);el.setAttribute('aria-pressed',selected);el.querySelector('.tier-action').textContent=selected?'IZBRANO ZA SIMULATOR ✓':'IZBERI ZA SIMULATOR ↗'});updateFin()}
+$$('.tier').forEach(el=>{el.addEventListener('click',()=>selectPlan(el.dataset.tier));el.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();selectPlan(el.dataset.tier)}})});
+function selectScenario(key){scenario=key;$('reduction').value=scen[key];$$('.scenario-btn').forEach(b=>{const yes=b.dataset.scenario===key;b.classList.toggle('active',yes);b.setAttribute('aria-pressed',yes)});updateFin()}
+$$('.scenario-btn').forEach(b=>b.addEventListener('click',()=>selectScenario(b.dataset.scenario)));
+['members','uptake','reduction','eventCost'].forEach(id=>$(id).addEventListener('input',()=>{if(id==='reduction'){$$('.scenario-btn').forEach(btn=>{btn.classList.remove('active');btn.setAttribute('aria-pressed','false')})}updateFin()}));updateFin();
+
+// AVATAR: stylized CG render based on reference photo; 2.5D motion, not a rigged 3D patient scan.
+(function(){
+ const stage=document.querySelector('.hero-stage');
+ const figure=document.querySelector('.hero-person');
+ if(!stage||!figure)return;
+ const reduced=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+ const setTilt=(x,y)=>{figure.style.setProperty('--avatar-y',x.toFixed(2)+'deg');figure.style.setProperty('--avatar-x',y.toFixed(2)+'deg')};
+ if(!reduced){
+  stage.addEventListener('pointermove', e=>{const r=stage.getBoundingClientRect();const x=Math.max(-1,Math.min(1,((e.clientX-r.left)/r.width-.5)*2));const y=Math.max(-1,Math.min(1,((e.clientY-r.top)/r.height-.5)*2));setTilt(x*13,-y*6)});
+  stage.addEventListener('pointerleave',()=>setTilt(0,0));
+ }
+})();
+
+})();
+</script>
+</body>
+</html>
